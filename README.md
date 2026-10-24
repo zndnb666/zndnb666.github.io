@@ -1,1 +1,120 @@
-# zndnb666.github.io
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>游戏秒玩合集</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif}
+
+/* 粒子背景 */
+#particles{
+  position:fixed;top:0;left:0;width:100vw;height:100vh;
+  background:linear-gradient(-45deg,#050520,#1b0e42,#082b46,#240b36);
+  background-size:400% 400%;
+  animation:bgFlow 12s ease infinite;
+  z-index:-1;
+}
+@keyframes bgFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.particle{
+  position:absolute;border-radius:500px;background:rgba(255,255,255,0.15);
+  animation:float 15s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(110vh) rotate(0deg);opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{transform:translateY(-10vh) rotate(720deg);opacity:0}
+}
+
+/* 游戏主页 */
+#gamePage{
+  padding:40px 20px;min-height:100vh;
+}
+.page-title{
+  text-align:center;font-size:42px;color:#fff;margin-bottom:50px;
+  text-shadow:0 0 15px #ff78f0,0 0 30px #844bff;
+  animation:textGlow 2.2s ease-in-out infinite alternate;
+}
+@keyframes textGlow{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.4)}
+}
+/* 板块标题样式 */
+.section-title{
+  width:100%;
+  color:#ffe877;
+  font-size:26px;
+  margin:40px 0 20px;
+  border-left:5px solid #844bff;
+  padding-left:12px;
+}
+.game-wrap{
+  max-width:1100px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:22px;
+}
+.game-item{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);
+  border-radius:16px;padding:20px;text-align:center;cursor:pointer;
+  transition:0.4s;backdrop-filter:blur(4px);
+  animation:itemFade 0.8s backwards;
+}
+@keyframes itemFade{
+  from{opacity:0;transform:translateY(25px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.game-item:hover{
+  transform:translateY(-8px) scale(1.04);
+  box-shadow:0 0 24px rgba(180,110,255,0.45);
+  background:rgba(255,255,255,0.13);
+}
+.game-item a{
+  color:#fff;text-decoration:none;font-size:17px;display:block;
+}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+
+<!-- 小游戏页面 -->
+<div id="gamePage">
+  <h1 class="page-title">丆.&牛逼</h1>
+  <div class="game-wrap">
+
+    <!-- 板块1：热门大作云游戏 -->
+    <div class="section-title">🔥 热门大作云游戏</div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95601">王者荣耀（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95704">和平精英（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95603">穿越火线CF（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95602">QQ飞车（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95564">英雄联盟手游（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95213">金铲铲之战（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95712">使命召唤手游（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95210">天涯明月刀手游（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95207">逆战（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95214">暗区突围（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95215">崩坏：星穹铁道（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95216">原神（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95218">永劫无间手游（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95706">幻塔（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95707">光·遇（秒玩）</a></div>
+
+    <!-- 板块2：棋牌休闲云游戏 -->
+    <div class="section-title">♠ 棋牌休闲云游戏</div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95179">欢乐斗地主（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95180">欢乐麻将全集（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95181">天天象棋（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95708">三国杀（秒玩）</a></div>
+
+    <!-- 板块3：经典老手游云游戏 -->
+    <div class="section-title">🎮 经典老手游云游戏</div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95211">QQ炫舞手游（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95208">龙之谷2（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95209">拳皇命运（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href="https://gamer.qq.com/v2/game/95182">天天酷跑（秒玩）</a></div>
+    <div class="game-item"><a target="_blank" href
