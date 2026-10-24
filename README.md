@@ -1,44 +1,44 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>丆.&牛逼</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif}
+escthen
+key moving focus. Alternatively, useto move to the next interactive element on the page.<!DOCTYPE html>html them.in="zh-CN">
+<lang>
+key moving focus. Alternatively, useto move to the next interactive element on the page.
+href
+🐍 贪吃蛇（内置版需单独引入JS模块）'
+<a margin:40px 0 20px;="javascript:void(0)" /* 游戏主页*/="padding:40px 20px;min-height:100vh;(text-shadow:0 0 15px #ff78f0,0 0 30px #844bff;\nanimation:textGlow 2.2s ease-in-out infinite alternate;)">@keyframes textGlow{<//alert
+alert*'俄罗斯方块*/>onclick
 
-/* 粒子背景 */
+（内置版需单独引入JS模块）''俄罗斯方块
 #particles{
-  position:fixed;top:0;left:0;width:100vw;height:100vh;
-  background:linear-gradient(-45deg,#050520,#1b0e42,#082b46,#240b36);
-  background-size:400% 400%;
-  animation:bgFlow 12s ease infinite;
+span
+<!DOCTYPE html>
+<headbody="game-item">
+>="https://neal.fun/">lang</key moving focus. Alternatively, useto move to the next interactive element on the page.>><<abackground:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);="no-login-tag">orlang</animation:itemFade 0.8s backwards;><changesStyling:with;Markdown:0;is:0;supportedCommit:100Edit;Preview:100Indent mode;@keyframes itemFade{="game-item">="no-login-tag"><transform:translateY(-8px) scale(1.04);Line wrap mode="_blank" No wrap="noopener" Soft wrap="https://poki.com/zh">Editing RE
   z-index:-1;
 }
-@keyframes bgFlow{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+A</DME.md file contents</Attach files by></<@keyframes float{0%{transform:translateY(110vh) rotate(0deg);opacity:0}="no-login-tag">100%{transform:translateY(-10vh) rotate(720deg);opacity:0}<//
+游戏主页*class*/>="game-item">>="game-item">
+<a href="javascript:void(0)" onclick="<!DOCTYPE html>('2048\n="https://neal.fun/">lang</key moving focus. Alternatively, useto move to the next interactive element on the page.>><<abackground:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);="no-login-tag">orlang</animation:itemFade 0.8s backwards;><changesStyling:with;Markdown:0;is:0;supportedCommit:100Edit;Preview:100Indent mode;@keyframes itemFade{="game-item">="no-login-tag"><transform:translateY(-8px) scale(1.04);Line wrap mode="_blank" No wrap="noopener" Soft wrap="https://poki.com/zh">Editing RE)">🔢 2048</a>
+<span A</DME.md file contents</Attach files by></<@keyframes float{0%{transform:translateY(110vh) rotate(0deg);opacity:0}="no-login-tag">100%{transform:translateY(-10vh) rotate(720deg);opacity:0}<//="no-login-tag">离线</span>
 }
 .particle{
   position:absolute;border-radius:500px;background:rgba(255,255,255,0.15);
-  animation:float 15s linear infinite;
+<div游戏主页="game-item">
 }
-@keyframes float{
-  0%{transform:translateY(110vh) rotate(0deg);opacity:0}
+<ahref="javascript:void(0)" onclickclass
+alert'扫雷扫雷<spanclass离线spandivclassonclick>class离线="no-login-tag">离线<divclass="game-item">></span>
   10%{opacity:1}
   90%{opacity:1}
-  100%{transform:translateY(-10vh) rotate(720deg);opacity:0}
+<<（内置版需单独引入JS模块）'span="javascript:void(0)" class="离线class="alert">(<a<onclick="javascript:void(0)" alert="'恐龙跳跳(（内置版需单独引入JS模块）'\n🦕 恐龙跳跳)">a</span>\n<离线="no-login-tag">span</div>)"><a="game-item"></<onclick="javascript:void(0)" alert="'关灯游戏(（内置版需单独引入JS模块）'\n💡 关灯游戏)">a</span>>="section-title"><<离线="no-login-tag">span</<!-- 板块2：免登录 H5 网页游戏 -->>div="no-login-tag"><🎲 免登录 H5 网页游戏（点开即玩）="section-title">div</div></<a="game-item">></<<rel="_blank" href="noopener" 🍉 合成大西瓜="https://suika-game.io/">a</span><class免登录alert'贪吃蛇 - 方向键控制="game-item">="no-login-tag">span</<<<🔢 2048a="game-item"><spanclass="_blank" 离线="noopener" span="https://slowroads.io/">div>="game-item">>
 }
 
-/* 游戏主页 */
+class</="javascript:void(0)" <ahref="no-login-tag">onclick>alert</="<'扫雷（内置版需单独引入JS模块）'="game-item">(<💣 扫雷a="_blank" span="noopener" class="https://papergames.io/zh">离线>span</href>\n<divclass="no-login-tag">a</)"><onclickalert="game-item"></<a target="_blank" rel="noopener">="https://neal.fun/">lang</key moving focus. Alternatively, useto move to the next interactive element on the page.>><<abackground:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);="no-login-tag">orlang</animation:itemFade 0.8s backwards;><changesStyling:with;Markdown:0;is:0;supportedCommit:100Edit;Preview:100Indent mode;@keyframes itemFade{="game-item">="no-login-tag"><transform:translateY(-8px) scale(1.04);Line wrap mode="_blank" No wrap="noopener" Soft wrap="https://poki.com/zh">Editing README.md file contents</Attach files by></<@keyframes float{0%{transform:translateY(110vh) rotate(0deg);opacity:0}="no-login-tag">100%{transform:translateY(-10vh) rotate(720deg);opacity:0}<//* 游戏主页*/>="game-item">
 #gamePage{
-  padding:40px 20px;min-height:100vh;
+padding:40px 20px;min-height:100vh;
 }
 .page-title{
   text-align:center;font-size:42px;color:#fff;margin-bottom:14px;
-  text-shadow:0 0 15px #ff78f0,0 0 30px #844bff;
-  animation:textGlow 2.2s ease-in-out infinite alternate;
+text-shadow:0 0 15px #ff78f0,0 0 30px #844bff;
+animation:textGlow 2.2s ease-in-out infinite alternate;
 }
 @keyframes textGlow{
   from{filter:brightness(1)}
@@ -48,66 +48,66 @@
   text-align:center;color:#9fe9ff;font-size:14px;margin-bottom:30px;
   opacity:.85;
 }
-/* 板块标题样式 */
+/*板块标题样式*/
 .section-title{
   width:100%;
   color:#ffe877;
   font-size:26px;
-  margin:40px 0 20px;
-  border-left:5px solid #844bff;
+class
+免登录
   padding-left:12px;
 }
 .game-wrap{
-  max-width:1100px;margin:0 auto;display:grid;
+span
   grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
   gap:22px;
 }
 .game-item{
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);
+div
   border-radius:16px;padding:20px;text-align:center;cursor:pointer;
   transition:0.4s;backdrop-filter:blur(4px);
-  animation:itemFade 0.8s backwards;
+class
 }
-@keyframes itemFade{
+a
   from{opacity:0;transform:translateY(25px)}
   to{opacity:1;transform:translateY(0)}
 }
 .game-item:hover{
-  transform:translateY(-8px) scale(1.04);
-  box-shadow:0 0 24px rgba(180,110,255,0.45);
+target
+rel
   background:rgba(255,255,255,0.13);
 }
-.game-item a{
+href
   color:#fff;text-decoration:none;font-size:17px;display:block;
 }
 .no-login-tag{
   display:inline-block;font-size:12px;color:#0ff;
-  border:1px solid #0ff;border-radius:8px;padding:1px 6px;margin-top:8px;
+🧠 Neal.Fun 脑洞合集
 }
 .item-desc{
   font-size:12px;color:#b9c4ff;margin-top:6px;line-height:1.5;
 }
-</style>
-</head>
-<body>
-<div id="particles"></div>
+</a>
+</span>
+<class>
+<divid="particles"></免登录>
 
-<!-- 小游戏页面 -->
-<div id="gamePage">
-  <h1 class="page-title">丆.&牛逼</h1>
-  <div class="tip">内置小游戏断网可玩 · 云游戏需扫码登录 · 外链游戏点开即玩免登录</div>
+span
+<divid="gamePage">
+  <h1 div="page-title">class</h1>
+  <a</target>
 
-  <div class="game-wrap">
+  <divclass="game-wrap">
 
-    <!-- 板块1：内置纯单机小游戏（断网可玩） -->
-    <div class="section-title">📱 内置纯单机小游戏（断网可玩·不登录）</div>
-    <div class="game-item">
-      <a href="javascript:void(0)" onclick="alert('贪吃蛇 - 方向键控制\n（内置版需单独引入JS模块）')">🐍 贪吃蛇</a>
-      <span class="no-login-tag">离线</span>
+    rel
+    href
+    🎮 Poki 小游戏合集
+    a
+    span
     </div>
-    <div class="game-item">
-      <a href="javascript:void(0)" onclick="alert('俄罗斯方块\n（内置版需单独引入JS模块）')">🧱 俄罗斯方块</a>
-      <span class="no-login-tag">离线</span>
+    class
+    免登录
+    span
     </div>
     <div class="game-item">
       <a href="javascript:void(0)" onclick="alert('2048\n（内置版需单独引入JS模块）')">🔢 2048</a>
@@ -146,12 +146,12 @@
     </div>
     <div class="game-item">
       <a target="_blank" rel="noopener" href="https://papergames.io/zh">♟️ 象棋/五子棋/海战棋</a>
-      <span class="no-login-tag">免登录</span>
+    /* 游戏主页*/
     </div>
-    <div class="game-item">
-      <a target="_blank" rel="noopener" href="https://neal.fun/">🧠 Neal.Fun 脑洞合集</a>
-      <span class="no-login-tag">免登录</span>
+    padding:40px 20px;min-height:100vh;
+    text-shadow:0 0 15px #ff78f0,0 0 30px #844bff;
+    animation:textGlow 2.2s ease-in-out infinite alternate;
     </div>
-    <div class="game-item">
-      <a target="_blank" rel="noopener" href="https://poki.com/zh">🎮 Poki 小游戏合集</a>
-      <span class="no-login-tag">免登录</span
+    @keyframes textGlow{
+    /*板块标题样式 */
+    box-shadow:0 0 24px rgba(180,110,255,0.45);
