@@ -50,42 +50,7 @@
     <div class="game-item"><a href="javascript:void(0)" onclick="openGame('g2048')">🔢 2048</a><div class="item-desc">方向键滑动合并相同数字，凑出 2048</div><span class="no-login-tag">离线</span></div>
     <div class="game-item"><a href="javascript:void(0)" onclick="openGame('minesweeper')">💣 扫雷</a><div class="item-desc">左键挖、右键标记，找出所有雷</div><span class="no-login-tag">离线</span></div>
     <div class="game-item"><a href="javascript:void(0)" onclick="openGame('memory')">🃏 翻牌记忆</a><div class="item-desc">翻两张牌，配对成功就消除，越少步数越好</div><span class="no-login-tag">离线</span></div>
-    <div class="game-item"><a hre<div class="section-title">🌐 免登录网页大作（需联网·点开即玩）</div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://pvz.wan1234.com/">🌻 植物大战僵尸网页版</a><div class="item-desc">49种植物 / 26类僵尸 / 冒险·生存·迷你游戏</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://www.mc.js.cool/">⛏️ MC.js 我的世界网页版</a><div class="item-desc">Eaglercraft 中文版 / 生存·创造·联机</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://pvz.heheda.top/">🧟 植物大战僵尸 备用站</a><div class="item-desc">pvz.wan1234.com 的备用镜像</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://mcjs.dev/">🧊 MC.js 代码版（编程沙盒）</a><div class="item-desc">用 JS 代码放方块，边玩边学</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="section-title">🔥 腾讯先锋云游戏（需扫码登录）</div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95601">王者荣耀（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95704">和平精英（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95218">和平精英 备用节点</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95564">英雄联盟手游（秒玩）</a><span class="no-login-tag">云游戏</span><span class="no-login-tag" style="color:#0f0;border-color:#0f0;">有游客模式</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95179">欢乐斗地主（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95180">欢乐麻将全集（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95181">完美世界-全新职业（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95208">一人之下（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95211">崩坏3@PC（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95706">蓝月传奇2（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95712">魂斗罗：归来（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95602">神角技巧（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95603">神角技巧 游客节点</a><span class="no-login-tag">云游戏</span><span class="no-login-tag" style="color:#0f0;border-color:#0f0;">有游客模式</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/">🔍 腾讯先锋官网（搜更多）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="section-title">☁️ 其它云游戏平台</div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://start.qq.com/">🎮 START 云游戏</a><div class="item-desc">腾讯 START / PC 大作云玩</div></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://www.xbox.com/zh-CN/play">🟩 Xbox 云游戏</a><div class="item-desc">Xbox Game Pass 云玩</div></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://play.geforcenow.com/">🟢 GeForce NOW</a><div class="item-desc">NVIDIA 云游戏 / Steam 串流</div></div>
-  </div>
-</div>
-
-<div class="game-modal" id="gameModal">
-  <div class="board">
-    <button class="close-btn" onclick="closeGame()">×</button>
-    <div id="gameContent"></div>
-  </div>
-</div>
-
-<script>
-/* ===== 1. 贪吃蛇 ===== */
+    <div class="game-item"><a hre/* ===== 1. 贪吃蛇 ===== */
 function startSnake(){
   const wrap=document.getElementById('gameContent');
   wrap.innerHTML='<h2>🐍 贪吃蛇</h2><div class="info" id="snakeScore">得分：0　最高：0</div><canvas id="snakeCv" width="400" height="400"></canvas><div class="info">方向键 / WASD / 滑动屏幕</div><button class="restart-btn" onclick="startSnake()">重新开始</button>';
@@ -97,7 +62,106 @@ function startSnake(){
     document.getElementById('snakeScore').textContent='得分：0　最高：'+best;
     placeFood();draw();
     if(timer)clearInterval(timer);
-    timer=setInterval(loop,105);/* ===== 3. 2048 ===== */
+    timer=setInterval(loop,105);
+  }
+  function placeFood(){
+    while(true){food={x:Math.floor(Math.random()*C),y:Math.floor(Math.random()*R)};if(!snake.some(function(s){return s.x===food.x&&s.y===food.y;}))break;}
+  }
+  function loop(){
+    if(!alive)return;
+    const h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+    if(h.x<0||h.y<0||h.x>=C||h.y>=R||snake.some(function(s){return s.x===h.x&&s.y===h.y;})){
+      alive=false;clearInterval(timer);
+      ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(0,0,400,400);
+      ctx.fillStyle='#fff';ctx.font='34px sans-serif';ctx.textAlign='center';
+      ctx.fillText('Game Over',200,190);ctx.font='18px sans-serif';ctx.fillStyle='#ffe877';
+      ctx.fillText('得分：'+score,200,230);return;
+    }
+    snake.unshift(h);
+    if(h.x===food.x&&h.y===food.y){
+      score++;
+      if(score>best){best=score;localStorage.setItem('snakeBest',best);}
+      document.getElementById('snakeScore').textContent='得分：'+score+'　最高：'+best;
+      placeFood();
+    } else snake.pop();
+    draw();
+  }
+  function draw(){
+    ctx.fillStyle='#0a0620';ctx.fillRect(0,0,400,400);
+    ctx.fillStyle='#ff78f0';
+    snake.forEach(function(s,i){ctx.globalAlpha=i===0?1:0.75;ctx.fillRect(s.x*S,s.y*S,S-1,S-1);});
+    ctx.globalAlpha=1;ctx.fillStyle='#5cff9d';ctx.fillRect(food.x*S,food.y*S,S-1,S-1);
+  }
+  const handler=function(e){
+    const k=e.key;
+    if((k==='ArrowUp'||k==='w'||k==='W')&&dir.y!==1)dir={x:0,y:-1};
+    else if((k==='ArrowDown'||k==='s'||k==='S')&&dir.y!==-1)dir={x:0,y:1};
+    else if((k==='ArrowLeft'||k==='a'||k==='A')&&dir.x!==1)dir={x:-1,y:0};
+    else if((k==='ArrowRight'||k==='d'||k==='D')&&dir.x!==-1)dir={x:1,y:0};
+  };
+  document.addEventListener('keydown',handler);
+  let ts=null;
+  cv.addEventListener('touchstart',function(e){ts={x:e.touches[0].clientX,y:e.touches[0].clientY};e.preventDefault();},{passive:false});
+  cv.addEventListener('touchmove',function(e){
+    if(!ts)return;
+    const t=e.touches[0],dx=t.clientX-ts.x,dy=t.clientY-ts.y;
+    if(Math.abs(dx)<20&&Math.abs(dy)<20)return;
+    if(Math.abs(dx)>Math.abs(dy)){if(dx>0&&dir.x!==-1)dir={x:1,y:0};else if(dx<0&&dir.x!==1)dir={x:-1,y:0};}
+    else{if(dy>0&&dir.y!==-1)dir={x:0,y:1};else if(dy<0&&dir.y!==1)dir={x:0,y:-1};}
+    ts=null;e.preventDefault();
+  },{passive:false});
+  reset();
+  return function(){clearInterval(timer);document.removeEventListener('keydown',handler);};
+}
+
+/* ===== 2. 俄罗斯方块 ===== */
+function startTetris(){
+  const wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>🧱 俄罗斯方块</h2><div class="info" id="tetScore">得分：0　行数：0</div><canvas id="tetCv" width="240" height="480"></canvas><div class="info">←→ 移动　↑/空格 旋转　↓ 加速</div><button class="restart-btn" onclick="startTetris()">重新开始</button>';
+  const cv=document.getElementById('tetCv'),ctx=cv.getContext('2d');
+  const COLS=12,ROWS=20,S=20;
+  const SHAPES=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[0,1,1],[1,1,0]],[[1,1,0],[0,1,1]]];
+  let board,piece,px,py,score,lines,timer,over,speed=600;
+  function reset(){
+    board=Array.from({length:ROWS},function(){return Array(COLS).fill(0);});
+    score=0;lines=0;over=false;speed=600;
+    document.getElementById('tetScore').textContent='得分：0　行数：0';
+    newPiece();draw();
+    if(timer)clearInterval(timer);
+    timer=setInterval(tick,speed);
+  }
+  function newPiece(){
+    const t=Math.floor(Math.random()*SHAPES.length);
+    piece=SHAPES[t].map(function(r){return r.slice();});
+    px=4;py=0;
+    if(collide(px,py,piece)){over=true;gameOver();}
+  }
+  function collide(x,y,shape){
+    for(let r=0;r<shape.length;r++)
+      for(let c=0;c<shape[r].length;c++)
+        if(shape[r][c]){
+          const nx=x+c,ny=y+r;
+          if(nx<0||nx>=COLS||ny>=ROWS)return true;
+          if(ny>=0&&board[ny][nx])return true;
+        }
+    return false;
+  }
+  function merge(){
+    for(let r=0;r<piece.length;r++)
+      for(let c=0;c<piece[r].length;c++)
+        if(piece[r][c])board[py+r][px+c]=1;
+  }
+  function clearLines(){
+    let cleared=0;
+    for(let r=ROWS-1;r>=0;r--)
+      if(board[r].every(function(v){return v;})){
+        board.splice(r,1);
+        board.unshift(Array(COLS).fill(0));
+        cleared++;r++;
+      }
+    if(cleared){
+      lines+=cleared;
+     /* ===== 3. 2048 ===== */
 function start2048(){
   const wrap=document.getElementById('gameContent');
   wrap.innerHTML='<h2>🔢 2048</h2><div class="info" id="g2Score">分数：0　最高：0</div><div id="g2Grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:340px;margin:0 auto;background:rgba(0,0,0,0.3);padding:10px;border-radius:12px;"></div><div class="info">方向键 / WASD / 滑动</div><button class="restart-btn" onclick="start2048()">重新开始</button>';
