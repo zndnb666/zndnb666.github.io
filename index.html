@@ -2,336 +2,876 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>丆.&牛逼</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>丆.&amp;牛逼 · 高级游戏厅</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",sans-serif}
-#particles{position:fixed;top:0;left:0;width:100vw;height:100vh;background:linear-gradient(-45deg,#050520,#1b0e42,#082b46,#240b36);background-size:400% 400%;animation:bgFlow 12s ease infinite;z-index:-1;}
-@keyframes bgFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.particle{position:absolute;border-radius:500px;background:rgba(255,255,255,0.15);animation:float 15s linear infinite;}
-@keyframes float{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) rotate(720deg);opacity:0}}
-#gamePage{padding:40px 20px;min-height:100vh;}
-.page-title{text-align:center;font-size:42px;color:#fff;margin-bottom:14px;text-shadow:0 0 15px #ff78f0,0 0 30px #844bff;animation:textGlow 2.2s ease-in-out infinite alternate;}
-@keyframes textGlow{from{filter:brightness(1)}to{filter:brightness(1.4)}}
-.tip{text-align:center;color:#9fe9ff;font-size:14px;margin-bottom:30px;opacity:.85;}
-.section-title{width:100%;color:#ffe877;font-size:26px;margin:40px 0 20px;border-left:5px solid #844bff;padding-left:12px;}
-.game-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:22px;}
-.game-item{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:0.4s;backdrop-filter:blur(4px);animation:itemFade 0.8s backwards;}
-@keyframes itemFade{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
-.game-item:hover{transform:translateY(-8px) scale(1.04);box-shadow:0 0 24px rgba(180,110,255,0.45);background:rgba(255,255,255,0.13);}
-.game-item a{color:#fff;text-decoration:none;font-size:17px;display:block;}
-.no-login-tag{display:inline-block;font-size:12px;color:#0ff;border:1px solid #0ff;border-radius:8px;padding:1px 6px;margin-top:8px;}
-.item-desc{font-size:12px;color:#b9c4ff;margin-top:6px;line-height:1.5;}
-.game-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:20px;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei",system-ui,sans-serif}
+html,body{min-height:100vh;overflow-x:hidden}
+
+/* ===== 白彩色混染背景（白色居多） ===== */
+body{
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(255,225,245,0.65) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(215,235,255,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 45% 75%, rgba(230,220,255,0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 5% 85%, rgba(220,248,255,0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 95% 65%, rgba(255,240,225,0.5) 0%, transparent 50%),
+    #fafbff;
+  background-attachment:fixed;
+  position:relative;
+}
+
+/* ===== 黑紫粒子雪（背景层，不进入卡片） ===== */
+#snowLayer{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.flake{
+  position:absolute;top:-12px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #4a1a6b, #12061f);
+  box-shadow:0 0 7px rgba(70,15,110,0.55);
+  animation:flakeFall linear infinite;will-change:transform;
+}
+@keyframes flakeFall{
+  0%{transform:translateY(-10vh) translateX(0) rotate(0deg);opacity:0.9}
+  100%{transform:translateY(112vh) translateX(55px) rotate(220deg);opacity:0.25}
+}
+
+/* ===== 页面容器 ===== */
+#gamePage{position:relative;z-index:1;padding:36px 22px 90px;max-width:1180px;margin:0 auto}
+.page-title{
+  text-align:center;font-size:46px;font-weight:900;letter-spacing:5px;
+  color:#1a0a2e;
+  text-shadow:0 2px 10px rgba(70,15,110,0.18);
+  margin-bottom:8px;
+}
+.tip{
+  display:block;width:fit-content;margin:0 auto 34px;
+  padding:9px 28px;border-radius:30px;font-size:13px;font-weight:500;
+  color:#2e1a4a;background:rgba(255,255,255,0.72);
+  border:1px solid rgba(70,25,110,0.18);
+  backdrop-filter:blur(10px);
+  box-shadow:0 2px 12px rgba(70,15,110,0.05);
+}/* ===== 板块标题（铺满一行） ===== */
+.section-title{
+  width:100%;display:flex;align-items:center;gap:12px;
+  margin:46px 0 20px;padding:11px 20px;
+  font-size:21px;font-weight:800;color:#12061f;
+  border-left:6px solid #4a1a6b;
+  background:rgba(255,255,255,0.6);
+  backdrop-filter:blur(12px);
+  border-radius:0 16px 16px 0;
+  box-shadow:0 3px 16px rgba(70,15,110,0.06);
+}
+.section-title .sub{margin-left:auto;font-size:12px;font-weight:400;color:#6a5a8a}
+
+/* ===== 游戏网格：每行 2 个 ===== */
+.game-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;width:100%}
+
+/* ===== 黑框卡片 ===== */
+.game-item{
+  background:linear-gradient(150deg,rgba(255,255,255,0.94),rgba(246,242,255,0.9));
+  border:2.5px solid #0a0a12;border-radius:18px;
+  cursor:pointer;text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;min-height:138px;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94),
+             box-shadow 0.3s,border-color 0.3s;
+  box-shadow:0 4px 22px rgba(25,8,45,0.1),inset 0 0 0 1px rgba(255,255,255,0.65);
+  backdrop-filter:blur(14px);
+}
+.game-item::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 15% 0%,rgba(170,130,255,0.12),transparent 55%);
+}
+.game-item:hover{
+  transform:translateY(-5px) scale(1.012);
+  border-color:#4a1a6b;
+  box-shadow:0 16px 42px rgba(50,15,90,0.2),0 0 0 1px rgba(70,25,110,0.25),
+             inset 0 0 0 1px rgba(255,255,255,0.85);
+}
+.game-item .inner{
+  padding:17px 17px 14px;display:flex;flex-direction:column;
+  height:100%;position:relative;z-index:1;
+}.game-icon{font-size:32px;line-height:1;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.icon-badge{
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;
+  background:#0a0a12;color:#ddd0ff;letter-spacing:0.4px;
+}
+.game-name{font-size:16.5px;font-weight:800;color:#0a0a12;margin-bottom:4px;letter-spacing:0.3px}
+.game-desc{font-size:12px;color:#54446e;line-height:1.5;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.tag{
+  font-size:10px;padding:2px 8px;border-radius:20px;
+  border:1px solid #0a0a12;color:#0a0a12;font-weight:600;
+  background:rgba(255,255,255,0.45);
+}
+.tag.hot{background:#0a0a12;color:#fff}
+.tag.green{border-color:#1a6b3a;color:#1a6b3a}
+.tag.purple{border-color:#4a1a6b;color:#4a1a6b}
+
+/* ===== 弹窗 ===== */
+.game-modal{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(8,4,18,0.85);backdrop-filter:blur(8px);
+  align-items:center;justify-content:center;padding:18px;
+}
 .game-modal.open{display:flex}
-.game-modal .board{background:rgba(20,12,45,0.97);border:1px solid rgba(180,110,255,0.5);border-radius:18px;padding:24px;max-width:560px;width:100%;max-height:92vh;overflow:auto;text-align:center;position:relative;}
-.game-modal .board h2{color:#ffe877;font-size:22px;margin-bottom:14px}
-.game-modal .board canvas{background:#0a0620;border-radius:12px;display:block;margin:0 auto 14px;max-width:100%;height:auto;}
-.game-modal .close-btn{position:absolute;top:12px;right:16px;font-size:26px;color:#fff;cursor:pointer;background:none;border:none;line-height:1;}
-.game-modal .close-btn:hover{color:#ff78f0}
-.game-modal .info{color:#9fe9ff;font-size:14px;margin:8px 0}
-.game-modal .restart-btn{background:linear-gradient(135deg,#844bff,#ff78f0);color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:15px;cursor:pointer;margin:6px 4px;}
-.game-modal .restart-btn:hover{filter:brightness(1.15)}
-.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:400px;margin:0 auto}
-.memory-card{aspect-ratio:1;background:linear-gradient(135deg,#844bff,#ff78f0);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;transition:transform .3s;transform-style:preserve-3d;transform:rotateY(180deg);}
-.memory-card.flipped{transform:rotateY(0)}
-.memory-card.matched{opacity:.4;cursor:default}
+.board{
+  background:linear-gradient(160deg,#110d1d,#1a1028);
+  border:2px solid rgba(130,90,210,0.38);
+  border-radius:20px;padding:22px;
+  max-width:580px;width:100%;max-height:92vh;overflow:auto;
+  text-align:center;position:relative;
+  box-shadow:0 0 65px rgba(70,25,150,0.3);
+}.close-btn{
+  position:absolute;top:9px;right:15px;font-size:29px;
+  color:#bfaee0;cursor:pointer;background:none;border:none;
+  line-height:1;transition:0.2s;
+}
+.close-btn:hover{color:#ff78f0;transform:rotate(90deg)}
+.board h2{color:#e2d2ff;font-size:21px;margin-bottom:11px}
+.board canvas{
+  background:#0a0618;border-radius:12px;display:block;
+  margin:0 auto 11px;max-width:100%;height:auto;
+  border:1px solid rgba(110,70,190,0.28);
+}
+.info{color:#a294c8;font-size:13.5px;margin:5px 0}
+.restart-btn{
+  background:linear-gradient(135deg,#4a1a6b,#8a4aff);
+  color:#fff;border:none;padding:10px 23px;border-radius:10px;
+  font-size:14.5px;cursor:pointer;margin:6px 3px;
+  transition:0.2s;font-weight:600;
+}
+.restart-btn:hover{filter:brightness(1.18);transform:translateY(-1px)}
+.restart-btn:active{transform:scale(0.97)}
 </style>
 </head>
 <body>
-<div id="particles"></div>
+<div id="snowLayer"></div>
 <div id="gamePage">
-  <h1 class="page-title">丆.&牛逼</h1>
-  <div class="tip">内置小游戏断网可玩 · 云游戏需扫码登录 · 外链游戏点开即玩免登录</div>
-  <div class="game-wrap">
-    <div class="section-title">📱 内置纯单机小游戏（断网可玩·不登录·真实可玩）</div>
-    <div class="game-item"><a href="javascript:void(0)" onclick="openGame('snake')">🐍 贪吃蛇</a><div class="item-desc">方向键/WASD/滑动控制，吃食物长身体，撞墙或自己就死</div><span class="no-login-tag">离线</span></div>
-    <div class="game-item"><a href="javascript:void(0)" onclick="openGame('tetris')">🧱 俄罗斯方块</a><div class="item-desc">方向键移动/旋转/加速，消行得分，速度越来越快</div><span class="no-login-tag">离线</span></div>
-    <div class="game-item"><a href="javascript:void(0)" onclick="openGame('g2048')">🔢 2048</a><div class="item-desc">方向键滑动合并相同数字，凑出 2048</div><span class="no-login-tag">离线</span></div>
-    <div class="game-item"><a href="javascript:void(0)" onclick="openGame('minesweeper')">💣 扫雷</a><div class="item-desc">左键挖、右键标记，找出所有雷</div><span class="no-login-tag">离线</span></div>
-    <div class="game-item"><a href="javascript:void(0)" onclick="openGame('memory')">🃏 翻牌记忆</a><div class="item-desc">翻两张牌，配对成功就消除，越少步数越好</div><span class="no-login-tag">离线</span></div>
-    <div class="game-item"><a hre<div class="section-title">🌐 免登录网页大作（需联网·点开即玩）</div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://pvz.wan1234.com/">🌻 植物大战僵尸网页版</a><div class="item-desc">49种植物 / 26类僵尸 / 冒险·生存·迷你游戏</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://www.mc.js.cool/">⛏️ MC.js 我的世界网页版</a><div class="item-desc">Eaglercraft 中文版 / 生存·创造·联机</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://pvz.heheda.top/">🧟 植物大战僵尸 备用站</a><div class="item-desc">pvz.wan1234.com 的备用镜像</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://mcjs.dev/">🧊 MC.js 代码版（编程沙盒）</a><div class="item-desc">用 JS 代码放方块，边玩边学</div><span class="no-login-tag">免登录</span><span class="no-login-tag">需联网</span></div>
-    <div class="section-title">🔥 腾讯先锋云游戏（需扫码登录）</div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95601">王者荣耀（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95704">和平精英（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95218">和平精英 备用节点</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95564">英雄联盟手游（秒玩）</a><span class="no-login-tag">云游戏</span><span class="no-login-tag" style="color:#0f0;border-color:#0f0;">有游客模式</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95179">欢乐斗地主（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95180">欢乐麻将全集（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95181">完美世界-全新职业（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95208">一人之下（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95211">崩坏3@PC（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95706">蓝月传奇2（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95712">魂斗罗：归来（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95602">神角技巧（秒玩）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/v2/game/95603">神角技巧 游客节点</a><span class="no-login-tag">云游戏</span><span class="no-login-tag" style="color:#0f0;border-color:#0f0;">有游客模式</span></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://gamer.qq.com/">🔍 腾讯先锋官网（搜更多）</a><span class="no-login-tag">云游戏</span></div>
-    <div class="section-title">☁️ 其它云游戏平台</div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://start.qq.com/">🎮 START 云游戏</a><div class="item-desc">腾讯 START / PC 大作云玩</div></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://www.xbox.com/zh-CN/play">🟩 Xbox 云游戏</a><div class="item-desc">Xbox Game Pass 云玩</div></div>
-    <div class="game-item"><a target="_blank" rel="noopener" href="https://play.geforcenow.com/">🟢 GeForce NOW</a><div class="item-desc">NVIDIA 云游戏 / Steam 串流</div></div>
+  <h1 class="page-title">丆.&amp;牛逼</h1>
+  <span class="tip">⚡ 免登录 · 即点即玩 · 9 款内置游戏 + 大牌外链</span>
+
+  <!-- ===== 板块一：内置游戏 ===== -->
+  <div class="section-title">🕹️ 内置游戏 <span class="sub">纯前端 · 断网可玩 · 9 款</span></div>
+  <div class="game-wrap"><div class="game-item" data-game="snake">
+  <div class="inner">
+    <div class="game-icon">🐍 <span class="icon-badge">经典</span></div>
+    <span class="game-name">贪吃蛇</span>
+    <div class="game-desc">方向键 / WASD / 滑动操控，吃食物变长，别撞墙。</div>
+    <div class="tags"><span class="tag hot">内置</span><span class="tag">键盘/触屏</span></div>
+  </div>
+</div>
+
+<div class="game-item" data-game="tetris">
+  <div class="inner">
+    <div class="game-icon">🧱 <span class="icon-badge">消除</span></div>
+    <span class="game-name">俄罗斯方块</span>
+    <div class="game-desc">←→移动，↑旋转，↓加速。堆满一行即可消除。</div>
+    <div class="tags"><span class="tag hot">内置</span><span class="tag">键盘</span></div>
+  </div>
+</div>
+
+<div class="game-item" data-game="g2048">
+  <div class="inner">
+    <div class="game-icon">🔢 <span class="icon-badge">数字</span></div>
+    <span class="game-name">2048</span>
+    <div class="game-desc">滑动合并相同数字，挑战合成 2048 方块。</div>
+    <div class="tags"><span class="tag hot">内置</span><span class="tag">键盘/触屏</span></div>
+  </div>
+</div>
+
+<div class="game-item" data-game="minesweeper">
+  <div class="inner">
+    <div class="game-icon">💣 <span class="icon-badge">益智</span></div>
+    <span class="game-name">扫雷</span>
+    <div class="game-desc">左键翻开，右键插旗。避开所有地雷即可获胜。</div>
+    <div class="tags"><span class="tag hot">内置</span><span class="tag">鼠标</span></div>
+  </div>
+</div><div class="game-item" data-game="memory">
+    <div class="inner">
+      <div class="game-icon">🃏 <span class="icon-badge">记忆</span></div>
+      <span class="game-name">记忆翻牌</span>
+      <div class="game-desc">翻开卡片记住图案位置，配对全部相同图案。</div>
+      <div class="tags"><span class="tag hot">内置</span><span class="tag">鼠标/触屏</span></div>
+    </div>
+  </div>
+
+  <div class="game-item" data-game="rps">
+    <div class="inner">
+      <div class="game-icon">✊ <span class="icon-badge">对战</span></div>
+      <span class="game-name">石头剪刀布</span>
+      <div class="game-desc">和电脑猜拳，简单解压，连赢有惊喜。</div>
+      <div class="tags"><span class="tag hot">内置</span><span class="tag">点击</span></div>
+    </div>
+  </div>
+
+  <div class="game-item" data-game="breakout">
+    <div class="inner">
+      <div class="game-icon">🏓 <span class="icon-badge">街机</span></div>
+      <span class="game-name">打砖块</span>
+      <div class="game-desc">移动挡板反弹小球，击碎所有砖块过关。</div>
+      <div class="tags"><span class="tag hot">内置</span><span class="tag">键盘</span></div>
+    </div>
+  </div>
+
+  <div class="game-item" data-game="flappy">
+    <div class="inner">
+      <div class="game-icon">🐦 <span class="icon-badge">反应</span></div>
+      <span class="game-name">Flappy Bird</span>
+      <div class="game-desc">点击 / 空格扇动翅膀，穿过管道缝隙。</div>
+      <div class="tags"><span class="tag hot">内置</span><span class="tag">点击/空格</span></div>
+    </div>
+  </div>
+
+  <div class="game-item" data-game="gomoku">
+    <div class="inner">
+      <div class="game-icon">⚫ <span class="icon-badge">棋类</span></div>
+      <span class="game-name">五子棋（人机）</span>
+      <div class="game-desc">15×15 棋盘，你先落黑子，五连即胜。</div>
+      <div class="tags"><span class="tag hot">内置</span><span class="tag">鼠标/触屏</span></div>
+    </div>
+  </div>
+
+</div><!-- ===== 板块二：免登录外链 ===== -->
+<div class="section-title">🌐 免登录外链 <span class="sub">需联网 · 新标签打开</span></div>
+<div class="game-wrap">
+
+  <a class="game-item" href="https://poki.com/zh" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">🎮 <span class="icon-badge">海量</span></div>
+      <span class="game-name">Poki 宝玩</span>
+      <div class="game-desc">塔防、射击、休闲、双人，数千款免登录 H5。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
+    </div>
+  </a>
+
+  <a class="game-item" href="https://www.crazygames.com" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">🕹️ <span class="icon-badge">4500+</span></div>
+      <span class="game-name">CrazyGames</span>
+      <div class="game-desc">io 对战、解谜、像素风，打开即玩无需注册。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
+    </div>
+  </a>
+
+  <a class="game-item" href="https://fc.wan1234.com" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">👾 <span class="icon-badge">怀旧</span></div>
+      <span class="game-name">红白机网页合集</span>
+      <div class="game-desc">魂斗罗、马里奥、冒险岛，经典 FC 即点即玩。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
+    </div>
+  </a>
+
+  <a class="game-item" href="https://mcjs.cc/" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">⛏️ <span class="icon-badge">沙盒</span></div>
+      <span class="game-name">我的世界网页版</span>
+      <div class="game-desc">纯免费 MC，支持单机与联机，打开即玩。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
+    </div>
+  </a>
+
+</div><!-- ===== 板块三：大牌游戏 · 免登录直玩 ===== -->
+<div class="section-title">🏆 大牌游戏 · 免登录直玩 <span class="sub">网页版 / 云游戏 · 点开即玩</span></div>
+<div class="game-wrap">
+
+  <a class="game-item" href="https://ys.mihoyo.com/cloud/" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">⛩️ <span class="icon-badge">开放世界</span></div>
+      <span class="game-name">云·原神</span>
+      <div class="game-desc">米哈游官方云游戏，浏览器秒玩提瓦特，无需下载 30G 客户端。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag purple">大牌IP</span></div>
+    </div>
+  </a>
+
+  <a class="game-item" href="https://sr.mihoyo.com/cloud/" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">🚂 <span class="icon-badge">回合制</span></div>
+      <span class="game-name">云·崩坏：星穹铁道</span>
+      <div class="game-desc">米哈游官方云版，网页直接上车，低配设备也能流畅跑图。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag purple">大牌IP</span></div>
+    </div>
+  </a>
+
+  <a class="game-item" href="https://mc.kurogames.com/cloud/" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">🌊 <span class="icon-badge">动作</span></div>
+      <span class="game-name">云·鸣潮</span>
+      <div class="game-desc">库洛官方云游戏，网页秒开，体验高速战斗与开放世界探索。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag purple">大牌IP</span></div>
+    </div>
+  </a><a class="game-item" href="https://dos.zone" target="_blank" rel="noopener">
+      <div class="inner">
+        <div class="game-icon">💾 <span class="icon-badge">怀旧神作</span></div>
+        <span class="game-name">DOS.Zone</span>
+        <div class="game-desc">上千款 90 年代大牌 PC 游戏在线玩：极品飞车、帝国时代、暴力摩托……</div>
+        <div class="tags"><span class="tag">免登录</span><span class="tag">千款经典</span></div>
+      </div>
+    </a>
+
+    <a class="game-item" href="https://cn.pigame.cc/" target="_blank" rel="noopener">
+      <div class="inner">
+        <div class="game-icon">🐷 <span class="icon-badge">云3A</span></div>
+        <span class="game-name">小猪秒玩</span>
+        <div class="game-desc">浏览器直接渲染 3A 大作与热门网游，无需下载、无需注册，3 秒启动。</div>
+        <div class="tags"><span class="tag">免登录</span><span class="tag purple">3A/网游</span></div>
+      </div>
+    </a>
+
+    <a class="game-item" href="https://www.suileyoo.com" target="_blank" rel="noopener">
+      <div class="inner">
+        <div class="game-icon">🖥️ <span class="icon-badge">网页版3A</span></div>
+        <span class="game-name">随乐游云游戏</span>
+        <div class="game-desc">网页秒开免下载，部分 3A 大作（如荒野大镖客2、骑马与砍杀2）免账号试玩。</div>
+        <div class="tags"><span class="tag">免登录</span><span class="tag purple">3A大作</span></div>
+      </div>
+    </a>
+
   </div>
 </div>
 
 <div class="game-modal" id="gameModal">
   <div class="board">
-    <button class="close-btn" onclick="closeGame()">×</button>
+    <button class="close-btn" id="closeBtn">×</button>
     <div id="gameContent"></div>
   </div>
-</div>
+</div><script>
+/* ===== 黑紫粒子雪：小而密，只在背景层 ===== */
+(function(){
+  var layer=document.getElementById('snowLayer');
+  var N=130;
+  for(var i=0;i<N;i++){
+    var f=document.createElement('div');
+    f.className='flake';
+    var s=Math.random()*2.6+1.1;
+    f.style.width=s+'px';f.style.height=s+'px';
+    f.style.left=Math.random()*100+'vw';
+    f.style.animationDuration=(Math.random()*13+9)+'s';
+    f.style.animationDelay=(Math.random()*16)+'s';
+    f.style.opacity=Math.random()*0.45+0.4;
+    layer.appendChild(f);
+  }
+})();
 
-<script>
-/* ===== 1. 贪吃蛇 ===== */
-function startSnake(){
-  const wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>🐍 贪吃蛇</h2><div class="info" id="snakeScore">得分：0　最高：0</div><canvas id="snakeCv" width="400" height="400"></canvas><div class="info">方向键 / WASD / 滑动屏幕</div><button class="restart-btn" onclick="startSnake()">重新开始</button>';
-  const cv=document.getElementById('snakeCv'),ctx=cv.getContext('2d');
-  const S=20,C=20,R=20;
-  let snake,dir,food,score,timer,alive,best=+localStorage.getItem('snakeBest')||0;
+/* ===== 游戏注册表 ===== */
+var games={};
+
+/* 1. 贪吃蛇 */
+games.snake=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>🐍 贪吃蛇</h2><div class="info" id="snScore">得分：0　最高：0</div><canvas id="snCv" width="400" height="400"></canvas><div class="info">方向键 / WASD / 滑动</div><button class="restart-btn" onclick="games.snake()">重新开始</button>';
+  var cv=document.getElementById('snCv'),ctx=cv.getContext('2d');
+  var S=20,C=20,R=20;
+  var snake,dir,food,score,timer,alive,best=+localStorage.getItem('snBest')||0;
   function reset(){
     snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];dir={x:1,y:0};score=0;alive=true;
-    document.getElementById('snakeScore').textContent='得分：0　最高：'+best;
+    document.getElementById('snScore').textContent='得分：0　最高：'+best;
     placeFood();draw();
-    if(timer)clearInterval(timer);
-    timer=setInterval(loop,105);/* ===== 3. 2048 ===== */
-function start2048(){
-  const wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>🔢 2048</h2><div class="info" id="g2Score">分数：0　最高：0</div><div id="g2Grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:340px;margin:0 auto;background:rgba(0,0,0,0.3);padding:10px;border-radius:12px;"></div><div class="info">方向键 / WASD / 滑动</div><button class="restart-btn" onclick="start2048()">重新开始</button>';
-  const grid=document.getElementById('g2Grid');
-  let board,score,best=+localStorage.getItem('g2Best')||0;
-  function reset(){
-    board=Array.from({length:4},function(){return Array(4).fill(0);});
-    score=0;addTile();addTile();render();
-    document.getElementById('g2Score').textContent='分数：0　最高：'+best;
+    clearInterval(timer);timer=setInterval(loop,105);
+  }function placeFood(){
+    while(true){food={x:~~(Math.random()*C),y:~~(Math.random()*R)};
+      if(!snake.some(function(s){return s.x===food.x&&s.y===food.y;}))break;}
   }
-  function addTile(){
-    const empty=[];
-    for(let r=0;r<4;r++)for(let c=0;c<4;c++)if(!board[r][c])empty.push([r,c]);
-    if(!empty.length)return;
-    const rc=empty[Math.floor(Math.random()*empty.length)];
-    board[rc[0]][rc[1]]=Math.random()<0.9?2:4;
+  function loop(){
+    if(!alive)return;
+    var h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+    if(h.x<0||h.y<0||h.x>=C||h.y>=R||snake.some(function(s){return s.x===h.x&&s.y===h.y;})){die();return;}
+    snake.unshift(h);
+    if(h.x===food.x&&h.y===food.y){
+      score++;if(score>best){best=score;localStorage.setItem('snBest',best);}
+      document.getElementById('snScore').textContent='得分：'+score+'　最高：'+best;placeFood();
+    }else snake.pop();
+    draw();
   }
-  function render(){
-    const colors={0:'rgba(255,255,255,0.05)',2:'#eee4da',4:'#ede0c8',8:'#f2b179',16:'#f59563',32:'#f67c5f',64:'#f65e3b',128:'#edcf72',256:'#edcc61',512:'#edc850',1024:'#edc53f',2048:'#edc22e'};
-    grid.innerHTML='';
-    for(let r=0;r<4;r++)
-      for(let c=0;c<4;c++){
-        const cell=document.createElement('div');
-        const v=board[r][c];
-        cell.style.cssText='aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:28px;font-weight:bold;transition:.12s;';
-        cell.style.background=colors[v]||'#3c3a32';
-        cell.style.color=v>4?'#fff':'#776e65';
-        cell.textContent=v||'';
-        grid.appendChild(cell);
-      }
+  function die(){
+    alive=false;clearInterval(timer);
+    ctx.fillStyle='rgba(0,0,0,0.62)';ctx.fillRect(0,0,400,400);
+    ctx.fillStyle='#fff';ctx.font='32px sans-serif';ctx.textAlign='center';
+    ctx.fillText('Game Over',200,190);
+    ctx.font='17px sans-serif';ctx.fillStyle='#ffe877';ctx.fillText('得分：'+score,200,228);
   }
-  function slide(row){
-    let arr=row.filter(function(v){return v;}),zeros=Array(4-arr.length).fill(0);
-    for(let i=0;i<arr.length-1;i++)
-      if(arr[i]===arr[i+1]){arr[i]*=2;arr.splice(i+1,1);i--;}
-    return arr.concat(zeros);
+  function draw(){
+    ctx.fillStyle='#0a0620';ctx.fillRect(0,0,400,400);
+    snake.forEach(function(s,i){ctx.globalAlpha=i===0?1:0.72;ctx.fillStyle='#ff78f0';ctx.fillRect(s.x*S,s.y*S,S-1,S-1);});
+    ctx.globalAlpha=1;ctx.fillStyle='#5cff9d';ctx.fillRect(food.x*S,food.y*S,S-1,S-1);
   }
-  function move(dir){
-    let moved=false,gained=0;
-    for(let i=0;i<4;i++){
-      let line=[];
-      if(dir==='left')line=[0,1,2,3].map(function(c){return board[i][c];});
-      if(dir==='right')line=[3,2,1,0].map(function(c){return board[i][c];});
-      if(dir==='up')line=[0,1,2,3].map(function(r){return board[r][i];});
-      if(dir==='down')line=[3,2,1,0].map(function(r){return board[r][i];});
-      const slid=slide(line);
-      gained+=slid.filter(function(v){return v>0&&!line.includes(v);}).reduce(function(a,b){return a+b;},0);
-      for(let k=0;k<4;k++){
-        const val=slid[k];
-        if(dir==='left'&&board[i][k]!==val)moved=true;
-        if(dir==='right'&&board[i][3-k]!==val)moved=true;
-        if(dir==='up'&&board[k][i]!==val)moved=true;
-        if(dir==='down'&&board[3-k][i]!==val)moved=true;
-        if(dir==='left')board[i][k]=val;
-        if(dir==='right')board[i][3-k]=val;
-        if(dir==='up')board[k][i]=val;
-        if(dir==='down')board[3-k][i]=val;
-      }
+  var key=function(e){
+    var k=e.key;
+    if((k==='ArrowUp'||k==='w'||k==='W')&&dir.y!==1)dir={x:0,y:-1};
+    else if((k==='ArrowDown'||k==='s'||k==='S')&&dir.y!==-1)dir={x:0,y:1};
+    else if((k==='ArrowLeft'||k==='a'||k==='A')&&dir.x!==1)dir={x:-1,y:0};
+    else if((k==='ArrowRight'||k==='d'||k==='D')&&dir.x!==-1)dir={x:1,y:0};
+  };
+  document.addEventListener('keydown',key);
+  reset();
+  return function(){clearInterval(timer);document.removeEventListener('keydown',key);};
+};
+
+/* 2. 俄罗斯方块 */
+games.tetris=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>🧱 俄罗斯方块</h2><div class="info" id="tetScore">得分：0　行数：0</div><canvas id="tetCv" width="240" height="480"></canvas><div class="info">←→移动 ↑旋转 ↓加速</div><button class="restart-btn" onclick="games.tetris()">重新开始</button>';var cv=document.getElementById('tetCv'),ctx=cv.getContext('2d');
+var COLS=12,ROWS=20,S=20;
+var SHAPES=[[[1,1,1,1]],[[1,1],[1,1]],[[0,1,0],[1,1,1]],[[1,0,0],[1,1,1]],[[0,0,1],[1,1,1]],[[0,1,1],[1,1,0]],[[1,1,0],[0,1,1]]];
+var board,piece,px,py,score,lines,timer,over,speed=600;
+function reset(){
+  board=Array.from({length:ROWS},function(){return Array(COLS).fill(0);});
+  score=0;lines=0;over=false;speed=600;
+  document.getElementById('tetScore').textContent='得分：0　行数：0';
+  newPiece();draw();
+  clearInterval(timer);timer=setInterval(tick,speed);
+}
+function newPiece(){
+  var t=~~(Math.random()*SHAPES.length);
+  piece=SHAPES[t].map(function(r){return r.slice();});px=4;py=0;
+  if(collide(px,py,piece)){over=true;gameOver();}
+}
+function collide(x,y,sh){
+  for(var r=0;r<sh.length;r++)for(var c=0;c<sh[r].length;c++)if(sh[r][c]){
+    var nx=x+c,ny=y+r;
+    if(nx<0||nx>=COLS||ny>=ROWS)return true;
+    if(ny>=0&&board[ny][nx])return true;
+  }
+  return false;
+}
+function merge(){piece.forEach(function(row,r){row.forEach(function(v,c){if(v)board[py+r][px+c]=1;});});}
+function clearLines(){
+  var cleared=0;
+  for(var r=ROWS-1;r>=0;r--){
+    if(board[r].every(function(v){return v;})){board.splice(r,1);board.unshift(Array(COLS).fill(0));cleared++;r++;}
+  }
+  if(cleared){
+    lines+=cleared;score+=[0,100,300,500,800][cleared]||1000;
+    document.getElementById('tetScore').textContent='得分：'+score+'　行数：'+lines;
+    speed=Math.max(120,600-lines*30);clearInterval(timer);timer=setInterval(tick,speed);
+  }
+}
+function tick(){
+  if(over)return;
+  if(!collide(px,py+1,piece)){py++;draw();return;}
+  merge();clearLines();newPiece();draw();
+}
+function draw(){
+  ctx.fillStyle='#0a0620';ctx.fillRect(0,0,240,480);
+  for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++)if(board[r][c]){
+    ctx.fillStyle='#8a4aff';ctx.fillRect(c*S,r*S,S-1,S-1);
+    ctx.fillStyle='rgba(255,255,255,0.14)';ctx.fillRect(c*S,r*S,S-1,4);
+  }
+  piece.forEach(function(row,r){row.forEach(function(v,c){if(v){
+    ctx.fillStyle='#ff78f0';ctx.fillRect((px+c)*S,(py+r)*S,S-1,S-1);
+    ctx.fillStyle='rgba(255,255,255,0.2)';ctx.fillRect((px+c)*S,(py+r)*S,S-1,4);
+  }});});
+}function gameOver(){
+    clearInterval(timer);
+    ctx.fillStyle='rgba(0,0,0,0.62)';ctx.fillRect(0,0,240,480);
+    ctx.fillStyle='#fff';ctx.font='26px sans-serif';ctx.textAlign='center';
+    ctx.fillText('Game Over',120,218);ctx.font='15px sans-serif';ctx.fillStyle='#ffe877';
+    ctx.fillText('得分：'+score,120,256);
+  }
+  var key=function(e){
+    if(over)return;
+    var k=e.key;
+    if(k==='ArrowLeft'&&!collide(px-1,py,piece))px--;
+    else if(k==='ArrowRight'&&!collide(px+1,py,piece))px++;
+    else if(k==='ArrowDown'&&!collide(px,py+1,piece))py++;
+    else if(k==='ArrowUp'||k===' '){
+      var rot=piece[0].map(function(_,i){return piece.map(function(r){return r[i];}).reverse();});
+      if(!collide(px,py,rot))piece=rot;
     }
-    if(moved){
+    draw();
+  };
+  document.addEventListener('keydown',key);
+  reset();
+  return function(){clearInterval(timer);document.removeEventListener('keydown',key);};
+};
+
+/* 3. 2048 */
+games.g2048=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>🔢 2048</h2><div class="info" id="g2Score">分数：0　最高：0</div><div id="g2Grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:340px;margin:0 auto;background:rgba(0,0,0,0.3);padding:10px;border-radius:12px;"></div><div class="info">方向键 / WASD / 滑动</div><button class="restart-btn" onclick="games.g2048()">重新开始</button>';
+  var grid=document.getElementById('g2Grid');
+  var board,score,best=+localStorage.getItem('g2Best')||0;
+  function reset(){
+    board=Array.from({length:4},function(){return Array(4).fill(0);});score=0;
+    addTile();addTile();render();
+    document.getElementById('g2Score').textContent='分数：0　最高：'+best;
+  }function addTile(){
+  var empty=[];
+  for(var r=0;r<4;r++)for(var c=0;c<4;c++)if(board[r][c]===0)empty.push([r,c]);
+  if(!empty.length)return;
+  var rc=empty[~~(Math.random()*empty.length)];
+  board[rc[0]][rc[1]]=Math.random()<0.9?2:4;
+}
+function render(){
+  var colors={0:'rgba(255,255,255,0.06)',2:'#eee4da',4:'#ede0c8',8:'#f2b179',16:'#f59563',32:'#f67c5f',64:'#f65e3b',128:'#edcf72',256:'#edcc61',512:'#edc850',1024:'#edc53f',2048:'#edc22e'};
+  grid.innerHTML='';
+  for(var r=0;r<4;r++)for(var c=0;c<4;c++){
+    var v=board[r][c],cell=document.createElement('div');
+    cell.style.cssText='aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:25px;font-weight:800;';
+    cell.style.background=colors[v]||'#3c3a32';
+    cell.style.color=v>4?'#fff':'#776e65';
+    cell.textContent=v||'';
+    grid.appendChild(cell);
+  }
+}
+function slide(row){
+  var arr=row.filter(function(v){return v;}),zeros=4-arr.length;
+  arr=arr.concat(Array(zeros).fill(0));
+  var gained=0;
+  for(var i=0;i<3;i++)if(arr[i]&&arr[i]===arr[i+1]){
+    arr[i]*=2;gained+=arr[i];arr.splice(i+1,1);arr.push(0);
+  }
+  return {arr:arr,gained:gained};
+}
+function move(dir){
+  var moved=false,gained=0;
+  for(var i=0;i<4;i++){
+    var line;
+    if(dir==='left')line=board[i].slice();
+    else if(dir==='right')line=board[i].slice().reverse();
+    else if(dir==='up')line=[0,1,2,3].map(function(r){return board[r][i];});
+    else line=[3,2,1,0].map(function(r){return board[r][i];});
+    var res=slide(line),slid=res.arr;gained+=res.gained;
+    for(var k=0;k<4;k++){
+      if(dir==='left'&&board[i][k]!==slid[k])moved=true;
+      if(dir==='right'&&board[i][3-k]!==slid[k])moved=true;
+      if(dir==='up'&&board[k][i]!==slid[k])moved=true;
+      if(dir==='down'&&board[3-k][i]!==slid[k])moved=true;
+    }
+    for(var k2=0;k2<4;k2++){
+      if(dir==='left')board[i][k2]=slid[k2];
+      else if(dir==='right')board[i][3-k2]=slid[k2];
+      else if(dir==='up')board[k2][i]=slid[k2];
+      else board[3-k2][i]=slid[k2];
+    }
+  }if(moved){
       score+=gained;
       if(score>best){best=score;localStorage.setItem('g2Best',best);}
       addTile();render();
       document.getElementById('g2Score').textContent='分数：'+score+'　最高：'+best;
-      let won=false;
-      for(let r=0;r<4&&!won;r++)for(let c=0;c<4;c++)if(board[r][c]===2048)won=true;
-      if(won)setTimeout(function(){alert('🎉 合成 2048！继续冲 4096？');},120);
-      else{let can=false;for(let r=0;r<4&&!can;r++)for(let c=0;c<4;c++){if(!board[r][c])can=true;if(c<3&&board[r][c]===board[r][c+1])can=true;if(r<3&&board[r][c]===board[r+1][c])can=true;}if(!can)setTimeout(function(){alert('没地方走了，分数：'+score);},120);}
+      if(board.flat().includes(2048))setTimeout(function(){alert('🎉 合成 2048！');},100);
     }
   }
-  const handler=function(e){
-    const k=e.key;
-    if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(k))e.preventDefault();
+  var key=function(e){
+    var k=e.key;
     if(k==='ArrowLeft'||k==='a'||k==='A')move('left');
     else if(k==='ArrowRight'||k==='d'||k==='D')move('right');
     else if(k==='ArrowUp'||k==='w'||k==='W')move('up');
     else if(k==='ArrowDown'||k==='s'||k==='S')move('down');
   };
-  document.addEventListener('keydown',handler);
+  document.addEventListener('keydown',key);
   reset();
-  return function(){document.removeEventListener('keydown',handler);};
-}
+  return function(){document.removeEventListener('keydown',key);};
+};
 
-/* ===== 4. 扫雷 ===== */
-function startMinesweeper(){
-  const wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>💣 扫雷</h2><div class="info" id="msInfo">左键挖 · 右键标记</div><div id="msGrid" style="display:inline-block;"></div><div class="info"><button class="restart-btn" onclick="startMinesweeper()">重新开始</button></div>';
-  const W=9,H=9,MINES=12;
-  let grid,revealed,flagged,gameOver;
+/* 4. 扫雷 */
+games.minesweeper=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>💣 扫雷</h2><div class="info" id="msInfo">💣 12　✅ 0</div><div id="msGrid" style="display:inline-block;"></div><div class="info"><button class="restart-btn" onclick="games.minesweeper()">重新开始</button></div>';
+  var W=9,H=9,MINES=12;
+  var grid,revealed,flagged,over;
   function reset(){
     grid=Array.from({length:H},function(){return Array.from({length:W},function(){return {mine:false,adj:0};});});
     revealed=Array.from({length:H},function(){return Array(W).fill(false);});
     flagged=Array.from({length:H},function(){return Array(W).fill(false);});
-    gameOver=false;
-    let placed=0;
+    over=false;
+    var placed=0;
     while(placed<MINES){
-      const r=Math.floor(Math.random()*H),c=Math.floor(Math.random()*W);
-      if(!grid[r][c].mine){grid/* ===== 5. 翻牌记忆 ===== */
-function startMemory(){
-  const wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>🃏 翻牌记忆</h2><div class="info" id="memInfo">步数：0</div><div class="memory-grid" id="memGrid"></div><button class="restart-btn" onclick="startMemory()">换一局</button>';
-  const icons=['🐶','🐱','🦊','🐻','🐼','🦁','🐯','🐸'];
-  let cards,first,second,lock,steps;
-  function reset(){
-    cards=[];
-    icons.forEach(function(ic){cards.push(ic,ic);});
-    for(let i=cards.length-1;i>0;i--){
-      const j=Math.floor(Math.random()*(i+1));
-      const tmp=cards[i];cards[i]=cards[j];cards[j]=tmp;
+      var r=~~(Math.random()*H),c=~~(Math.random()*W);
+      if(!grid[r][c].mine){grid[r][c].mine=true;placed++;}
     }
-    first=null;second=null;lock=false;steps=0;
-    document.getElementById('memInfo').textContent='步数：0';
+    for(var r2=0;r2<H;r2++)for(var c2=0;c2<W;c2++)if(!grid[r2][c2].mine){
+      var n=0;
+      for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++){
+        var nr=r2+dr,nc=c2+dc;
+        if(nr>=0&&nr<H&&nc>=0&&nc<W&&grid[nr][nc].mine)n++;
+      }
+      grid[r2][c2].adj=n;
+    }
+    document.getElementById('msInfo').textContent='💣 12　✅ 0';
+    render();
+  }function reveal(r,c){
+    if(r<0||r>=H||c<0||c>=W||revealed[r][c]||flagged[r][c]||over)return;
+    revealed[r][c]=true;
+    if(grid[r][c].mine){lose();return;}
+    if(grid[r][c].adj===0)for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++)if(dr||dc)reveal(r+dr,c+dc);
+    checkWin();
+  }
+  function toggleFlag(r,c){
+    if(revealed[r][c]||over)return;
+    flagged[r][c]=!flagged[r][c];
+    var n=0;flagged.forEach(function(row){row.forEach(function(v){if(v)n++;});});
+    document.getElementById('msInfo').textContent='💣 '+(MINES-n)+'　✅ '+n;
     render();
   }
+  function lose(){
+    over=true;
+    for(var r=0;r<H;r++)for(var c=0;c<W;c++)revealed[r][c]=true;
+    render();
+    document.getElementById('msInfo').textContent='💥 踩雷了！';
+  }
+  function checkWin(){
+    for(var r=0;r<H;r++)for(var c=0;c<W;c++)
+      if(!grid[r][c].mine&&!revealed[r][c])return;
+    over=true;
+    document.getElementById('msInfo').textContent='🎉 扫雷成功！';
+  }
   function render(){
-    const g=document.getElementById('memGrid');
+    var g=document.getElementById('msGrid');
     g.innerHTML='';
-    cards.forEach(function(ic,i){
-      const card=document.createElement('div');
-      card.className='memory-card';
-      card.dataset.i=i;
-      card.textContent=ic;
-      g.appendChild(card);
-    });
-    document.querySelectorAll('.memory-card').forEach(function(card){
-      card.addEventListener('click',function(){
-        if(lock)return;
-        const i=+card.dataset.i;
-        if(card.classList.contains('flipped')||card.classList.contains('matched'))return;
-        card.classList.add('flipped');
-        if(first===null)first=i;
-        else {
-          second=i;steps++;
-          document.getElementById('memInfo').textContent='步数：'+steps;
-          if(cards[first]===cards[second]){
-            const els=document.querySelectorAll('.memory-card');
-            setTimeout(function(){els[first].classList.add('matched');els[second].classList.add('matched');first=null;second=null;const left=document.querySelectorAll('.memory-card:not(.matched)').length;if(left===0)document.getElementById('memInfo').textContent='🎉 完成！共 '+steps+' 步';},250);
-          } else {
-            lock=true;
-            const els=document.querySelectorAll('.memory-card');
-            setTimeout(function(){els[first].classList.remove('flipped');els[second].classList.remove('flipped');first=null;second=null;lock=false;},700);
-          }
+    for(var r=0;r<H;r++)for(var c=0;c<W;c++){
+      (function(r,c){
+        var btn=document.createElement('button');
+        btn.style.cssText='width:34px;height:34px;font-size:14px;font-weight:700;border:1px solid #2a1a4a;cursor:pointer;border-radius:4px;margin:1px;';
+        if(!revealed[r][c]){
+          btn.style.background=flagged[r][c]?'#4a1a6b':'rgba(255,255,255,0.1)';
+          btn.textContent=flagged[r][c]?'🚩':'';
+        }else if(grid[r][c].mine){
+          btn.style.background='#8a1a1a';btn.textContent='💣';
+        }else{
+          btn.style.background='rgba(200,190,230,0.2)';
+          btn.style.color=grid[r][c].adj===1?'#4a9aff':grid[r][c].adj===2?'#2a8a2a':'#c0a0ff';
+          btn.textContent=grid[r][c].adj||'';
         }
-      });
-    });
+        btn.addEventListener('click',function(){reveal(r,c);});
+        btn.addEventListener('contextmenu',function(e){e.preventDefault();toggleFlag(r,c);});
+        g.appendChild(btn);
+      })(r,c);
+    }
   }
   reset();
   return function(){};
-}
-
-/* ===== 6. 石头剪刀布 ===== */
-function startRPS(){
-  const wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>✊ 石头剪刀布</h2><div class="info" id="rpsScore">你 0 : 0 电脑　连胜 0</div><div id="rpsBoard" style="font-size:60px;margin:18px 0;min-height:80px;">👊 vs 👊</div><div id="rpsMsg" style="color:#ffe877;font-size:16px;margin-bottom:14px;">三局两胜，选一个：</div><div><button class="restart-btn" onclick="pickRPS(0)">✊ 石头</button><button class="restart-btn" onclick="pickRPS(1)">✌️ 剪刀</button><button class="restart-btn" onclick="pickRPS(2)">🖐 布</button></div><button class="restart-btn" onclick="startRPS()">重开</button>';
-  let pw=0,cw=0,streak=0;
-  function pickRPS(you){
-    if(pw>=2||cw>=2){pw=0;cw=0;}
-    const arr=['✊','✌️','🖐'];
-    const comp=Math.floor(Math.random()*3);
-    let res;
-    if(you===comp)res='平局';
-    else if((you===0&&comp===1)||(you===1&&comp===2)||(you===2&&comp===0)){res='你赢了这局！';pw++;streak++;}
-    else {res='电脑赢了这局';cw++;streak=0;}
-    document.getElementById('rpsBoard').textContent=arr[you]+' vs '+arr[comp];
-    document.getElementById('rpsMsg').textContent=res;
-    document.getElementById('rpsScore').textContent='你 '+pw+' : '+cw+' 电脑　连胜 '+streak;
-    if(pw>=2)setTimeout(function(){document.getElementById('rpsMsg').textContent='🎉 你赢了整局！';pw=0;cw=0;},400);
-    if(cw>=2)setTimeout(function(){document.getElementById('rpsMsg').textContent='😢 电脑赢了整局，再来！';pw=0;cw=0;},400);
-  }
-  window.pickRPS=pickRPS;
+};/* 5. 记忆翻牌 */
+games.memory=function(){
+  var wrap=document.getElementById('gameContent');
+  var icons=['🍎','🍌','🍇','🍓','🍒','🥝','🍑','🍍'];
+  var deck=icons.concat(icons).sort(function(){return Math.random()-0.5;});
+  var flipped=[],matched=0,moves=0,lock=false;
+  wrap.innerHTML='<h2>🃏 记忆翻牌</h2><div class="info" id="memInfo">步数：0　配对：0/8</div><div id="memGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:360px;margin:0 auto;"></div><button class="restart-btn" onclick="games.memory()">重新开始</button>';
+  var grid=document.getElementById('memGrid');
+  deck.forEach(function(icon,i){
+    var card=document.createElement('div');
+    card.style.cssText='aspect-ratio:1;background:linear-gradient(135deg,#4a1a6b,#8a4aff);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;transition:0.3s;user-select:none;color:transparent;';
+    card.textContent=icon;card.dataset.icon=icon;card.dataset.i=i;
+    card.addEventListener('click',function(){
+      if(lock||card.dataset.done||flipped.indexOf(card)>=0)return;
+      card.style.background='rgba(255,255,255,0.15)';card.style.color='#fff';
+      flipped.push(card);
+      if(flipped.length===2){
+        moves++;
+        document.getElementById('memInfo').textContent='步数：'+moves+'　配对：'+matched+'/8';
+        if(flipped[0].dataset.icon===flipped[1].dataset.icon){
+          flipped.forEach(function(c){c.dataset.done='1';c.style.opacity='0.35';c.style.cursor='default';});
+          matched++;flipped=[];
+          document.getElementById('memInfo').textContent='步数：'+moves+'　配对：'+matched+'/8';
+          if(matched===8)setTimeout(function(){alert('🎉 全部配对成功！');},200);
+        }else{
+          lock=true;
+          setTimeout(function(){
+            flipped.forEach(function(c){c.style.background='linear-gradient(135deg,#4a1a6b,#8a4aff)';c.style.color='transparent';});
+            flipped=[];lock=false;
+          },500);
+        }
+      }
+    });
+    grid.appendChild(card);
+  });
   return function(){};
-}
+};
 
-/* ===== 7. 恐龙跳跳 ===== */
-function startDino(){
-  const wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>🦕 恐龙跳跳</h2><div class="info" id="dinoScore">距离：0　最高：0</div><canvas id="dinoCv" width="480" height="160"></canvas><div class="info">空格 / 上键 / 点屏幕跳跃</div><button class="restart-btn" onclick="startDino()">重新开始</button>';
-  const cv=document.getElementById('dinoCv'),ctx=cv.getContext('2d');
-  let dino,y,vy,gravity,jumping,obstacles,speed,score,timer,over,best=+localStorage.getItem('dinoBest')||0;
+/* 6. 石头剪刀布 */
+games.rps=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>✊ 石头剪刀布</h2><div class="info" id="rpsScore">胜：0　负：0　平：0</div><div style="display:flex;justify-content:center;gap:16px;margin:20px 0;" id="rpsBtns"></div><div class="info" id="rpsResult" style="font-size:18px;font-weight:700;color:#e0d0ff;">选择你的出拳</div><button class="restart-btn" onclick="games.rps()">重置比分</button>';var win=0,lose=0,draw=0;
+  var opts=['✊','✋','✌️'],names=['石头','布','剪刀'];
+  var btns=document.getElementById('rpsBtns');
+  opts.forEach(function(o,i){
+    var b=document.createElement('button');
+    b.className='restart-btn';b.textContent=o;b.style.fontSize='32px';b.style.padding='12px 24px';
+    b.onclick=function(){
+      var cpu=~~(Math.random()*3);
+      var res=document.getElementById('rpsResult');
+      if(i===cpu){draw++;res.textContent='平局！都是'+names[i];res.style.color='#ffe877';}
+      else if((i===0&&cpu===2)||(i===1&&cpu===0)||(i===2&&cpu===1)){win++;res.textContent='你赢了！'+names[i]+' 胜 '+names[cpu];res.style.color='#5cff9d';}
+      else{lose++;res.textContent='你输了！'+names[cpu]+' 胜 '+names[i];res.style.color='#ff6b6b';}
+      document.getElementById('rpsScore').textContent='胜：'+win+'　负：'+lose+'　平：'+draw;
+    };
+    btns.appendChild(b);
+  });
+  return function(){};
+};
+
+/* 7. 打砖块 */
+games.breakout=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>🏓 打砖块</h2><div class="info" id="brScore">得分：0</div><canvas id="brCv" width="480" height="360"></canvas><div class="info">←→ / A D 移动挡板</div><button class="restart-btn" onclick="games.breakout()">重新开始</button>';
+  var cv=document.getElementById('brCv'),ctx=cv.getContext('2d');
+  var paddle={x:190,w:100,h:12,y:340},ball={x:240,y:300,dx:3,dy:-3,r:7};
+  var bricks=[],score=0,timer,over=false;
+  var COLS=8,BW=52,BH=18,PAD=6,TOP=40;
   function reset(){
-    dino={x:60,w:30,h:34};y=126;vy=0;gravity=0.9;jumping=false;
-    obstacles=[];speed=5;score=0;over=false;
-    document.getElementById('dinoScore').textContent='距离：0　最高：'+best;
-    if(timer)clearInterval(timer);
-    timer=setInterval(loop,20);
+    paddle.x=190;ball={x:240,y:300,dx:3,dy:-3,r:7};score=0;over=false;
+    bricks=[];
+    for(var r=0;r<5;r++)for(var c=0;c<COLS;c++)
+      bricks.push({x:PAD+c*(BW+PAD),y:TOP+r*(BH+PAD),w:BW,h:BH,alive:true});
+    document.getElementById('brScore').textContent='得分：0';
+    draw();clearInterval(timer);timer=setInterval(loop,16);
   }
   function loop(){
     if(over)return;
-    score+=1;
-    if(score%300===0)speed+=0.4;
-    if(!jumping&&(Math.random()<0.02||(obstacles.length&&obstacles[obstacles.length-1].x<300&&Math.random()<0.03))){
-      obstacles.push({x:480,w:16,h:30});
+    ball.x+=ball.dx;ball.y+=ball.dy;
+    if(ball.x-ball.r<0||ball.x+ball.r>480)ball.dx*=-1;
+    if(ball.y-ball.r<0)ball.dy*=-1;
+    if(ball.y+ball.r>360){over=true;clearInterval(timer);drawGameOver();return;}
+    if(ball.y+ball.r>=paddle.y&&ball.x>=paddle.x&&ball.x<=paddle.x+paddle.w&&ball.dy>0){
+      var hit=(ball.x-(paddle.x+paddle.w/2))/(paddle.w/2);
+      ball.dx=hit*5;ball.dy=-Math.abs(ball.dy);
     }
-    vy+=gravity;y+=vy;
-    if(y>=126){y=126;jumping=false;}
-    obstacles.forEach(function(o){o.x-=speed;});
-    obstacles=obstacles.filter(function(o){return o.x>-20;});
-    for(let i=0;i<obstacles.length;i++){
-      const o=obstacles[i];
-      if(dino.x<o./* ===== 弹窗控制 ===== */
-const games={snake:startSnake,tetris:startTetris,g2048:start2048,minesweeper:startMinesweeper,memory:startMemory,rps:startRPS,dino:startDino,lights:startLights};
-let currentCleanup=null;
-function openGame(name){
-  const modal=document.getElementById('gameModal');
-  modal.classList.add('open');
-  document.getElementById('gameContent').innerHTML='';
-  if(currentCleanup)currentCleanup();
-  currentCleanup=games[name]()||null;
-}
-function closeGame(){
-  document.getElementById('gameModal').classList.remove('open');
-  if(currentCleanup)currentCleanup();
-  currentCleanup=null;
-}
-document.getElementById('gameModal').addEventListener('click',function(e){
-  if(e.target.id==='gameModal')closeGame();
-});
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape')closeGame();
-});
+    bricks.forEach(function(b){
+      if(!b.alive)return;
+      if(ball.x+b.r>b.x&&ball.x-b.r<b.x+b.w&&ball.y+b.r>b.y&&ball.y-b.r<b.y+b.h){
+        b.alive=false;score+=10;ball.dy*=-1;
+        document.getElementById('brScore').textContent='得分：'+score;
+      }
+    });
+    if(bricks.every(function(b){return !b.alive;})){over=true;clearInterval(timer);drawWin();return;}
+    draw();
+  }function draw(){
+    ctx.fillStyle='#0a0620';ctx.fillRect(0,0,480,360);
+    ctx.fillStyle='#8a4aff';ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
+    ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fillStyle='#ff78f0';ctx.fill();
+    bricks.forEach(function(b){
+      if(!b.alive)return;
+      ctx.fillStyle=b.y<60?'#5cff9d':b.y<100?'#ffe877':'#ff6b9d';
+      ctx.fillRect(b.x,b.y,b.w,b.h);
+    });
+  }
+  function drawGameOver(){
+    ctx.fillStyle='rgba(0,0,0,0.62)';ctx.fillRect(0,0,480,360);
+    ctx.fillStyle='#fff';ctx.font='30px sans-serif';ctx.textAlign='center';
+    ctx.fillText('Game Over',240,170);ctx.font='16px sans-serif';ctx.fillStyle='#ffe877';
+    ctx.fillText('得分：'+score,240,208);
+  }
+  function drawWin(){
+    ctx.fillStyle='rgba(0,0,0,0.62)';ctx.fillRect(0,0,480,360);
+    ctx.fillStyle='#5cff9d';ctx.font='30px sans-serif';ctx.textAlign='center';
+    ctx.fillText('🎉 通关！',240,170);ctx.fillStyle='#ffe877';ctx.font='16px sans-serif';
+    ctx.fillText('得分：'+score,240,208);
+  }
+  var key=function(e){
+    var k=e.key;
+    if((k==='ArrowLeft'||k==='a'||k==='A')&&paddle.x>0)paddle.x-=28;
+    if((k==='ArrowRight'||k==='d'||k==='D')&&paddle.x<380)paddle.x+=28;
+  };
+  document.addEventListener('keydown',key);
+  reset();
+  return function(){clearInterval(timer);document.removeEventListener('keydown',key);};
+};
 
-/* ===== 粒子生成 ===== */
-const box=document.getElementById('particles');
-for(let i=0;i<40;i++){
-  const p=document.createElement('div');
-  p.className='particle';
-  const s=Math.random()*6+2;
-  p.style.width=s+'px';
-  p.style.height=s+'px';
-  p.style.left=Math.random()*100+'vw';
-  p.style.animationDuration=(Math.random()*10+8)+'s';
-  p.style.animationDelay=(Math.random()*10)+'s';
-  box.appendChild(p);
+/* 8. Flappy Bird */
+games.flappy=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>🐦 Flappy Bird</h2><div class="info" id="flScore">得分：0</div><canvas id="flCv" width="320" height="440"></canvas><div class="info">点击 / 空格 扇翅膀</div><button class="restart-btn" onclick="games.flappy()">重新开始</button>';
+  var cv=document.getElementById('flCv'),ctx=cv.getContext('2d');
+  var bird={y:200,vy:0},pipes=[],score=0,timer,over=false,frame=0;
+  var G=0.45,JUMP=-7.2,PIPE_W=52,GAP=130,SPEED=2.4;
+  function reset(){
+    bird={y:200,vy:0};pipes=[];score=0;over=false;frame=0;
+    document.getElementById('flScore').textContent='得分：0';
+    draw();clearInterval(timer);timer=setInterval(loop,16);
+  }function loop(){
+    if(over)return;
+    frame++;
+    bird.vy+=G;bird.y+=bird.vy;
+    if(bird.y<0||bird.y>440){die();return;}
+    if(frame%90===0)pipes.push({x:320,top:60+Math.random()*200});
+    pipes.forEach(function(p){p.x-=SPEED;});
+    pipes=pipes.filter(function(p){return p.x+PIPE_W>0;});
+    for(var i=0;i<pipes.length;i++){
+      var p=pipes[i];
+      if(bird.y+12>p.top&&bird.y-12<p.top+GAP&&p.x<60&&p.x+PIPE_W>0){die();return;}
+      if(!p.passed&&p.x+PIPE_W<60){p.passed=true;score++;document.getElementById('flScore').textContent='得分：'+score;}
+    }
+    draw();
+  }
+  function die(){
+    over=true;clearInterval(timer);
+    ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(0,0,320,440);
+    ctx.fillStyle='#fff';ctx.font='28px sans-serif';ctx.textAlign='center';
+    ctx.fillText('Game Over',160,200);ctx.fillStyle='#ffe877';ctx.font='16px sans-serif';
+    ctx.fillText('得分：'+score,160,236);
+  }
+  function draw(){
+    ctx.fillStyle='#0a0620';ctx.fillRect(0,0,320,440);
+    ctx.fillStyle='#5cff9d';
+    pipes.forEach(function(p){ctx.fillRect(p.x,0,PIPE_W,p.top);ctx.fillRect(p.x,p.top+GAP,PIPE_W,440-p.top-GAP);});
+    ctx.beginPath();ctx.arc(60,bird.y,13,0,Math.PI*2);ctx.fillStyle='#ffe877';ctx.fill();
+    ctx.fillStyle='#0a0620';ctx.beginPath();ctx.arc(64,bird.y-4,3,0,Math.PI*2);ctx.fill();
+  }
+  var jump=function(){if(over)return;bird.vy=JUMP;};
+  cv.addEventListener('click',jump);
+  var key=function(e){if(e.key===' ')jump();};
+  document.addEventListener('keydown',key);
+  reset();
+  return function(){clearInterval(timer);cv.removeEventListener('click',jump);document.removeEventListener('keydown',key);};
+};
+
+/* 9. 五子棋（人机） */
+games.gomoku=function(){
+  var wrap=document.getElementById('gameContent');
+  wrap.innerHTML='<h2>⚫ 五子棋（人机）</h2><div class="info" id="gmInfo">你先手（黑子）</div><canvas id="gmCv" width="420" height="420"></canvas><button class="restart-btn" onclick="games.gomoku()">重新开始</button>';
+  var cv=document.getElementById('gmCv'),ctx=cv.getContext('2d');
+  var N=15,S=28,OFF=14;
+  var board,turn,over;
+  function reset(){
+    board=Array.from({length:N},function(){return Array(N).fill(0);});
+    turn=1;over=false;
+    document.getElementById('gmInfo').textContent='你先手（黑子）';
+    draw();
+  }function draw(){
+  ctx.fillStyle='#d4a96a';ctx.fillRect(0,0,420,420);
+  ctx.strokeStyle='#3a2a1a';ctx.lineWidth=1;
+  for(var i=0;i<N;i++){
+    ctx.beginPath();ctx.moveTo(OFF+i*S,OFF);ctx.lineTo(OFF+i*S,OFF+(N-1)*S);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(OFF,OFF+i*S);ctx.lineTo(OFF+(N-1)*S,OFF+i*S);ctx.stroke();
+  }
+  for(var r=0;r<N;r++)for(var c=0;c<N;c++){
+    if(!board[r][c])continue;
+    ctx.beginPath();ctx.arc(OFF+c*S,OFF+r*S,12,0,Math.PI*2);
+    ctx.fillStyle=board[r][c]===1?'#0a0a12':'#f5f0ff';
+    ctx.fill();ctx.strokeStyle='#0a0a12';ctx.stroke();
+  }
 }
-</script>
-</body>
-</html>
+function click(e){
+  if(over||turn!==1)return;
+  var rect=cv.getBoundingClientRect();
+  var x=e.clientX-rect.left,y=e.clientY-rect.top;
+  var c=Math.round((x-OFF)/S),r=Math.round((y-OFF)/S);
+  if(r<0||r>=N||c<0||c>=N||board[r][c])return;
+  board[r][c]=1;draw();
+  if(check(r,c,1)){over=true;document.getElementById('gmInfo').textContent='🎉 你赢了！';return;}
+  turn=2;document.getElementById('gmInfo').textContent='电脑思考中…';
+  setTimeout(aiMove,200);
+}
+function aiMove(){
+  if(over)return;
+  var empties=[];
+  for(var r=0;r<N;r++)for(var c=0;c<N;c++)if(!board[r][c])empties.push([r,c]);
+  if(!empties.length){over=true;document.getElementById('gmInfo').textContent='平局';return;}
+  var pick=empties[~~(Math.random()*empties.length)];
+  outer:for(var i=0;i<empties.length;i++){
+    var rr=empties[i][0],cc=empties[i][1];
+    board[rr][cc]=2;
+    if(check(rr,cc,2)){pick=[rr,cc];board[rr][cc]=0;break outer;}
+    board[rr][cc]=0;
+  }
+  board[pick[0]][pick[1]]=2;draw();
+  if(check(pick[0],pick[1],2)){over=true;document.getElementById('gmInfo').textContent='💻 电脑赢了';return;}
+  turn=1;document.getElementById('gmInfo').textContent='轮到你了（黑子）';
+}
+function check(r,c,p){
+  var dirs=[[1,0],[0,1],[1,1],[1,-1]];
+  for(var d=0;d<dirs.length;d++){
+    var dr=dirs[d][0],dc=dirs[d][1],n=1;
+    for(var s=1;s<5;s++){var nr=r+dr*s,nc=c+dc*s;if(nr<0||nr>=N||nc<0||nc>=N||board[nr][nc]!==p)break;n++;}
+    for(var s2=1;s2<5;s2++){var nr2=r-dr*s2,nc2=c-dc*s2;if(nr2<
