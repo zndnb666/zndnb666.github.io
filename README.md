@@ -86,6 +86,36 @@ body{
 .restart-btn{background:linear-gradient(135deg,#4a1a6b,#8a4aff);color:#fff;border:none;padding:10px 23px;border-radius:10px;font-size:14.5px;cursor:pointer;margin:6px 3px;transition:0.2s;font-weight:600}
 .restart-btn:hover{filter:brightness(1.18);transform:translateY(-1px)}
 .restart-btn:active{transform:scale(0.97)}
+
+/* ===== 联系板块：与游戏卡片同款黑框玻璃风格 ===== */
+.contact{
+  width:100%;
+  margin-top:56px;
+  padding:26px 20px;
+  text-align:center;
+  background:linear-gradient(150deg,rgba(255,255,255,0.94),rgba(246,242,255,0.9));
+  border:2.5px solid #0a0a12;
+  border-radius:18px;
+  backdrop-filter:blur(14px);
+  box-shadow:0 4px 22px rgba(25,8,45,0.1),inset 0 0 0 1px rgba(255,255,255,0.65);
+  overflow-x:auto;
+}
+.contact-line1{
+  font-size:16px;
+  color:#808080;
+  font-weight:600;
+  letter-spacing:0.5px;
+  line-height:1.6;
+  white-space:nowrap;
+}
+.contact-line2{
+  margin-top:12px;
+  font-size:16px;
+  color:#808080;
+  font-weight:500;
+  letter-spacing:0.3px;
+  line-height:1.6;
+}
 </style>
 </head>
 <body>
@@ -294,7 +324,7 @@ body{
       <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
     </div>
   </a>
-  </div><div class="section-title">🏆 大牌游戏 · 免登录直玩 <span class="sub">网页版 / 云游戏 · 点开即玩</span></div>
+</div><div class="section-title">🏆 大牌游戏 · 免登录直玩 <span class="sub">网页版 / 云游戏 · 点开即玩</span></div>
   <div class="game-wrap">
     <a class="game-item" href="https://ys.mihoyo.com/cloud/" target="_blank" rel="noopener">
       <div class="inner">
@@ -345,13 +375,19 @@ body{
       </div>
     </a>
   </div>
+
+  <!-- ===== 联系板块 ===== -->
+  <div class="contact">
+    <div class="contact-line1">想联系我？或想要提出您的宝贵意见？别见外！任何意见都可以提，尽管联系我！</div>
+    <div class="contact-line2">联系方式:网易邮箱:zndnbnb@163.com</div>
+  </div>
 </div>
 <div class="game-modal" id="gameModal">
   <div class="board">
     <button class="close-btn" id="closeBtn">×</button>
     <div id="gameContent"></div>
   </div>
-  </div><script>
+    </div><script>
 (function(){
   var layer=document.getElementById('snowLayer');
   if(!layer)return;
@@ -470,8 +506,7 @@ function draw(){
     ctx.fillStyle='#ff78f0';ctx.fillRect((px+c)*S,(py+r)*S,S-1,S-1);
     ctx.fillStyle='rgba(255,255,255,0.2)';ctx.fillRect((px+c)*S,(py+r)*S,S-1,4);
   }});});
-    }
-function gameOver(){
+                                                       }function gameOver(){
     clearInterval(timer);
     ctx.fillStyle='rgba(0,0,0,0.62)';ctx.fillRect(0,0,240,480);
     ctx.fillStyle='#fff';ctx.font='26px sans-serif';ctx.textAlign='center';
@@ -530,7 +565,7 @@ function slide(row){
     arr[i]*=2;gained+=arr[i];arr.splice(i+1,1);arr.push(0);
   }
   return {arr:arr,gained:gained};
-}function move(dir){
+      }function move(dir){
     var moved=false,gained=0;
     for(var i=0;i<4;i++){
       var line;
@@ -604,7 +639,7 @@ function slide(row){
     if(grid[r][c].mine){lose();return;}
     if(grid[r][c].adj===0)for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++)if(dr||dc)reveal(r+dr,c+dc);
     checkWin();
-}function toggleFlag(r,c){
+    }function toggleFlag(r,c){
     if(revealed[r][c]||over)return;
     flagged[r][c]=!flagged[r][c];
     var n=0;flagged.forEach(function(row){row.forEach(function(v){if(v)n++;});});
@@ -740,7 +775,7 @@ games.rps=function(){
     });
     if(bricks.every(function(b){return !b.alive;})){over=true;clearInterval(timer);drawWin();return;}
     draw();
-        }function draw(){
+      }function draw(){
     ctx.fillStyle='#0a0620';ctx.fillRect(0,0,480,360);
     ctx.fillStyle='#8a4aff';ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
     ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fillStyle='#ff78f0';ctx.fill();
@@ -795,7 +830,7 @@ games.rps=function(){
       if(!p.passed&&p.x+PIPE_W<60){p.passed=true;score++;document.getElementById('flScore').textContent='得分：'+score;}
     }
     draw();
-          }function die(){
+  }function die(){
     over=true;clearInterval(timer);
     ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(0,0,320,440);
     ctx.fillStyle='#fff';ctx.font='28px sans-serif';ctx.textAlign='center';
@@ -827,7 +862,7 @@ games.gomoku=function(){
     turn=1;over=false;
     document.getElementById('gmInfo').textContent='你先手（黑子）';
     draw();
-        }function draw(){
+  }function draw(){
   ctx.fillStyle='#d4a96a';ctx.fillRect(0,0,420,420);
   ctx.strokeStyle='#3a2a1a';ctx.lineWidth=1;
   for(var i=0;i<N;i++){
@@ -867,7 +902,7 @@ function aiMove(){
   board[pick[0]][pick[1]]=2;draw();
   if(check(pick[0],pick[1],2)){over=true;document.getElementById('gmInfo').textContent='💻 电脑赢了';return;}
   turn=1;document.getElementById('gmInfo').textContent='轮到你了（黑子）';
-    }function check(r,c,p){
+      }function check(r,c,p){
     var dirs=[[1,0],[0,1],[1,1],[1,-1]];
     for(var d=0;d<dirs.length;d++){
       var dr=dirs[d][0],dc=dirs[d][1],n=1;
