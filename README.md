@@ -87,7 +87,7 @@ body{
 .restart-btn:hover{filter:brightness(1.18);transform:translateY(-1px)}
 .restart-btn:active{transform:scale(0.97)}
 
-/* ===== 联系板块：与游戏卡片同款黑框玻璃风格 ===== */
+/* ===== 联系板块 ===== */
 .contact{
   width:100%;
   margin-top:56px;
@@ -98,24 +98,79 @@ body{
   border-radius:18px;
   backdrop-filter:blur(14px);
   box-shadow:0 4px 22px rgba(25,8,45,0.1),inset 0 0 0 1px rgba(255,255,255,0.65);
-  overflow-x:auto;
-}
-.contact-line1{
-  font-size:16px;
-  color:#808080;
-  font-weight:600;
-  letter-spacing:0.5px;
-  line-height:1.6;
-  white-space:nowrap;
 }
 .contact-line2{
-  margin-top:12px;
-  font-size:16px;
+  font-size:clamp(10px,2.6vw,16px);
   color:#808080;
   font-weight:500;
   letter-spacing:0.3px;
   line-height:1.6;
 }
+
+/* ===== 公告页 ===== */
+#noticeOverlay{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  z-index:10001;
+  display:flex;align-items:center;justify-content:center;
+}
+#noticePanel{
+  position:absolute;
+  top:20px;left:20px;right:20px;bottom:20px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 0 50px rgba(0,0,0,0.25);
+  display:flex;flex-direction:column;align-items:center;
+  padding:28px 24px;
+  overflow-y:auto;
+  animation:noticeIn 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+@keyframes noticeIn{
+  from{transform:scale(0);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+#noticeOverlay.closing #noticePanel{
+  animation:noticeOut 0.5s cubic-bezier(0.5,0,0.75,0) forwards;
+}
+@keyframes noticeOut{
+  from{transform:scale(1);opacity:1}
+  to{transform:scale(0);opacity:0}
+}
+.notice-title{
+  display:inline-block;
+  border:2px solid #000;
+  border-radius:6px;
+  padding:6px 22px;
+  font-size:11px;
+  font-weight:700;
+  color:#000;
+  letter-spacing:3px;
+  margin-bottom:28px;
+  white-space:nowrap;
+  background:#f5f5f5;
+}
+.notice-content{
+  width:100%;
+  max-width:640px;
+  text-align:left;
+  color:#000;
+  font-size:16px;
+  line-height:1.9;
+}
+.notice-content p{margin-bottom:14px}
+.notice-content strong{font-weight:700}
+#closeNotice{
+  margin-top:28px;
+  padding:10px 36px;
+  background:#000;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:15px;
+  cursor:pointer;
+  transition:0.2s;
+}
+#closeNotice:hover{background:#333}
 </style>
 </head>
 <body>
@@ -274,6 +329,14 @@ body{
       <div class="tags"><span class="tag">免登录</span><span class="tag green">新标签</span></div>
     </div>
   </a>
+  <a class="game-item" href="https://66970010-boop.github.io/frog-miner/" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">🐸 <span class="icon-badge">放置</span></div>
+      <span class="game-name">奶蛙工厂</span>
+      <div class="game-desc">GitHub Pages 原创放置小游戏，点击奶蛙积累资源、解锁升级，越点越上瘾。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag green">新标签</span></div>
+    </div>
+  </a>
 </div><div class="section-title">🌐 免登录外链 <span class="sub">需联网 · 新标签打开</span></div>
 <div class="game-wrap">
   <a class="game-item" href="https://pvz.wan1234.com/" target="_blank" rel="noopener">
@@ -321,6 +384,14 @@ body{
       <div class="game-icon">⛏️ <span class="icon-badge">沙盒</span></div>
       <span class="game-name">我的世界网页版</span>
       <div class="game-desc">纯免费 MC，支持单机与联机，打开即玩。</div>
+      <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
+    </div>
+  </a>
+  <a class="game-item" href="https://playcsonline.com" target="_blank" rel="noopener">
+    <div class="inner">
+      <div class="game-icon">🔫 <span class="icon-badge">射击</span></div>
+      <span class="game-name">Cs go</span>
+      <div class="game-desc">网页版 CS 反恐精英，免登录直接开战，经典射击玩法。</div>
       <div class="tags"><span class="tag">免登录</span><span class="tag green">需联网</span></div>
     </div>
   </a>
@@ -376,18 +447,31 @@ body{
     </a>
   </div>
 
-  <!-- ===== 联系板块 ===== -->
+  <!-- ===== 联系方式 ===== -->
   <div class="contact">
-    <div class="contact-line1">想联系我？或想要提出您的宝贵意见？别见外！任何意见都可以提，尽管联系我！</div>
     <div class="contact-line2">联系方式:网易邮箱:zndnbnb@163.com</div>
   </div>
 </div>
+
+<!-- ===== 公告页 ===== -->
+<div id="noticeOverlay">
+  <div id="noticePanel">
+    <div class="notice-title">通知</div>
+    <div class="notice-content">
+      <p><strong>更新内容:</strong><br>1.本站新增:Cs go和奶蛙工厂</p>
+      <p><strong>本站说明:</strong><br>本站上方所有游戏都免登录！免注册！点击即玩！<br>下方云游戏大多可以密码、邮箱登录，少量借助软件请见量！</p>
+      <p><strong>本站初衷:</strong><br>让网页不再是单一的内容，而是让每个享受到丰富的乐趣。</p>
+    </div>
+    <button id="closeNotice">我知道了</button>
+  </div>
+</div>
+
 <div class="game-modal" id="gameModal">
   <div class="board">
     <button class="close-btn" id="closeBtn">×</button>
     <div id="gameContent"></div>
   </div>
-    </div><script>
+</div><script>
 (function(){
   var layer=document.getElementById('snowLayer');
   if(!layer)return;
@@ -442,7 +526,7 @@ function draw(){
   ctx.fillStyle='#0a0620';ctx.fillRect(0,0,400,400);
   snake.forEach(function(s,i){ctx.globalAlpha=i===0?1:0.72;ctx.fillStyle='#ff78f0';ctx.fillRect(s.x*S,s.y*S,S-1,S-1);});
   ctx.globalAlpha=1;ctx.fillStyle='#5cff9d';ctx.fillRect(food.x*S,food.y*S,S-1,S-1);
-    }var key=function(e){
+  }var key=function(e){
     var k=e.key;
     if((k==='ArrowUp'||k==='w'||k==='W')&&dir.y!==1)dir={x:0,y:-1};
     else if((k==='ArrowDown'||k==='s'||k==='S')&&dir.y!==-1)dir={x:0,y:1};
@@ -506,7 +590,7 @@ function draw(){
     ctx.fillStyle='#ff78f0';ctx.fillRect((px+c)*S,(py+r)*S,S-1,S-1);
     ctx.fillStyle='rgba(255,255,255,0.2)';ctx.fillRect((px+c)*S,(py+r)*S,S-1,4);
   }});});
-                                                       }function gameOver(){
+                                                                                                }function gameOver(){
     clearInterval(timer);
     ctx.fillStyle='rgba(0,0,0,0.62)';ctx.fillRect(0,0,240,480);
     ctx.fillStyle='#fff';ctx.font='26px sans-serif';ctx.textAlign='center';
@@ -565,7 +649,7 @@ function slide(row){
     arr[i]*=2;gained+=arr[i];arr.splice(i+1,1);arr.push(0);
   }
   return {arr:arr,gained:gained};
-      }function move(dir){
+}function move(dir){
     var moved=false,gained=0;
     for(var i=0;i<4;i++){
       var line;
@@ -639,7 +723,7 @@ function slide(row){
     if(grid[r][c].mine){lose();return;}
     if(grid[r][c].adj===0)for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++)if(dr||dc)reveal(r+dr,c+dc);
     checkWin();
-    }function toggleFlag(r,c){
+}function toggleFlag(r,c){
     if(revealed[r][c]||over)return;
     flagged[r][c]=!flagged[r][c];
     var n=0;flagged.forEach(function(row){row.forEach(function(v){if(v)n++;});});
@@ -775,7 +859,7 @@ games.rps=function(){
     });
     if(bricks.every(function(b){return !b.alive;})){over=true;clearInterval(timer);drawWin();return;}
     draw();
-      }function draw(){
+    }function draw(){
     ctx.fillStyle='#0a0620';ctx.fillRect(0,0,480,360);
     ctx.fillStyle='#8a4aff';ctx.fillRect(paddle.x,paddle.y,paddle.w,paddle.h);
     ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fillStyle='#ff78f0';ctx.fill();
@@ -830,7 +914,7 @@ games.rps=function(){
       if(!p.passed&&p.x+PIPE_W<60){p.passed=true;score++;document.getElementById('flScore').textContent='得分：'+score;}
     }
     draw();
-  }function die(){
+                                                        }function die(){
     over=true;clearInterval(timer);
     ctx.fillStyle='rgba(0,0,0,0.6)';ctx.fillRect(0,0,320,440);
     ctx.fillStyle='#fff';ctx.font='28px sans-serif';ctx.textAlign='center';
@@ -862,7 +946,7 @@ games.gomoku=function(){
     turn=1;over=false;
     document.getElementById('gmInfo').textContent='你先手（黑子）';
     draw();
-  }function draw(){
+        }function draw(){
   ctx.fillStyle='#d4a96a';ctx.fillRect(0,0,420,420);
   ctx.strokeStyle='#3a2a1a';ctx.lineWidth=1;
   for(var i=0;i<N;i++){
@@ -902,7 +986,7 @@ function aiMove(){
   board[pick[0]][pick[1]]=2;draw();
   if(check(pick[0],pick[1],2)){over=true;document.getElementById('gmInfo').textContent='💻 电脑赢了';return;}
   turn=1;document.getElementById('gmInfo').textContent='轮到你了（黑子）';
-      }function check(r,c,p){
+}function check(r,c,p){
     var dirs=[[1,0],[0,1],[1,1],[1,-1]];
     for(var d=0;d<dirs.length;d++){
       var dr=dirs[d][0],dc=dirs[d][1],n=1;
@@ -964,6 +1048,19 @@ if(document.readyState==='loading'){
 }else{
   bindGameItems();
 }
+
+/* ===== 公告页控制 ===== */
+(function(){
+  var overlay = document.getElementById('noticeOverlay');
+  var closeBtn = document.getElementById('closeNotice');
+  if(!overlay || !closeBtn) return;
+  closeBtn.addEventListener('click', function(){
+    overlay.classList.add('closing');
+    setTimeout(function(){
+      overlay.style.display = 'none';
+    }, 500);
+  });
+})();
 </script>
 </body>
 </html>
