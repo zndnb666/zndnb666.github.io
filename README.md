@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>尊者 · 高级游戏厅</title>
-<script src="https://js.puter.com/v2/"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft Yahei", sans-serif; }
 html, body { min-height: 100vh; overflow-x: hidden; }
@@ -16,7 +15,9 @@ html, body { min-height: 100vh; overflow-x: hidden; }
   --card-bg: #ffffff;
   --card-border: #0a0a12;
   --nav-bg: rgba(255,255,255,0.85);
-  --panel-bg: rgba(230,235,245,0.95);
+  --panel-bg: rgba(128, 128, 128, 0.2);
+  --panel-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: blur(20px) saturate(160%);
 }
 body.dark-mode {
   --bg-body: #12101e;
@@ -25,7 +26,8 @@ body.dark-mode {
   --card-bg: #1a1028;
   --card-border: #4a1a6b;
   --nav-bg: rgba(26,16,40,0.85);
-  --panel-bg: rgba(26,16,40,0.95);
+  --panel-bg: rgba(40, 40, 50, 0.5);
+  --panel-border: rgba(150, 150, 160, 0.3);
 }body {
   background: var(--bg-body);
   background-image: radial-gradient(ellipse at 15% 15%, rgba(255,225,245,0.65) 0%, transparent 55%),
@@ -72,8 +74,8 @@ body.dark-mode {
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
   box-shadow: 0 4px 22px rgba(25,8,45,0.1);
 }
-.game-item:hover { transform: translateY(-5px) scale(1.012); border-color: #8a4aff; box-shadow: 0 16px 42px rgba(50,15,90,0.2); }.game-item .inner { padding: 17px; display: flex; flex-direction: column; height: 100%; position: relative; z-index: 1; }
-.game-icon { font-size: 32px; line-height: 1; margin-bottom: 7px; display: flex; align-items: center; gap: 8px; }
+.game-item:hover { transform: translateY(-5px) scale(1.012); border-color: #8a4aff; box-shadow: 0 16px 42px rgba(50,15,90,0.2); }
+.game-item .inner { padding: 17px; display: flex; flex-direction: column; height: 100%; position: relative; z-index: 1; }.game-icon { font-size: 32px; line-height: 1; margin-bottom: 7px; display: flex; align-items: center; gap: 8px; }
 .icon-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: #8a4aff; color: #fff; }
 .game-name { font-size: 16.5px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; letter-spacing: 0.3px; }
 .game-desc { font-size: 12px; color: var(--text-sub); line-height: 1.5; flex: 1; }
@@ -92,46 +94,60 @@ body.dark-mode {
 .board canvas { background: #0a0618; border-radius: 12px; display: block; margin: 0 auto 11px; max-width: 100%; height: auto; }
 .info { color: var(--text-sub); font-size: 13.5px; margin: 5px 0; }
 .restart-btn { background: #8a4aff; color: #fff; border: none; padding: 10px 23px; border-radius: 10px; font-size: 14.5px; cursor: pointer; font-weight: 600; }
-
 #bottomNav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 400px; background: var(--nav-bg); backdrop-filter: blur(20px); border-radius: 30px; display: flex; justify-content: space-around; padding: 10px 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); z-index: 10005; border: 1px solid var(--card-border); opacity: 0; pointer-events: none; transition: 0.3s; }
 #bottomNav.active { opacity: 1; pointer-events: auto; }.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; flex: 1; }
 .nav-icon-wrap { width: 44px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 16px; transition: 0.3s; font-size: 20px; }
 .nav-item span { font-size: 12px; font-weight: 600; color: var(--text-sub); transition: 0.3s; }
 .nav-item.active .nav-icon-wrap { background: rgba(138,74,255,0.15); }
 .nav-item.active span { color: #8a4aff; }
+
+/* ===== 灰色玻璃质感面板（聊天/个人/游戏库通用） ===== */
 #chatPanel, #userPanel, #libraryPanel {
   position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%) translateY(20px);
   width: calc(100% - 40px); max-width: 450px; height: 80vh; max-height: 800px;
-  background: var(--panel-bg); backdrop-filter: blur(20px); border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2); display: flex; flex-direction: column;
-  overflow: hidden; z-index: 10004; border: 2px solid var(--card-border);
+  background: var(--panel-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+  display: flex; flex-direction: column;
+  overflow: hidden; z-index: 10004;
+  border: 1px solid var(--panel-border);
   opacity: 0; pointer-events: none; transition: 0.3s;
 }
-#chatPanel.open, #userPanel.open, #libraryPanel.open { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }.chat-header, .up-header, .lib-header { background: #8a4aff; color: #fff; padding: 12px 14px; display: flex; align-items: center; gap: 10px; font-weight: 700; }
+#chatPanel.open, #userPanel.open, #libraryPanel.open { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }.chat-header, .up-header, .lib-header {
+  background: rgba(80, 80, 90, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff; padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px; font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
 .chat-back, .chat-close, .up-close, .lib-close { cursor: pointer; font-size: 22px; margin-left: auto; }
 .chat-title, .lib-title { flex: 1; font-size: 15px; text-align: center; }
 .chat-body { flex: 1; overflow-y: auto; padding: 12px; background: transparent; }
 .chat-msg { display: flex; gap: 8px; margin-bottom: 12px; align-items: flex-start; }
 .chat-msg.self { flex-direction: row-reverse; }
-.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: #8a4aff; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: #fff; cursor: pointer;}
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(138,74,255,0.8); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.2);}
 .chat-bubble-wrap { max-width: 72%; }
-.chat-name { font-size: 11px; color: var(--text-sub); margin-bottom: 3px; padding: 0 4px; }
+.chat-name { font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 3px; padding: 0 4px; }
 .chat-msg.self .chat-name { text-align: right; }
-.chat-bubble { padding: 9px 13px; border-radius: 14px; background: var(--card-bg); font-size: 14px; line-height: 1.5; word-break: break-word; color: var(--text-main); border: 1px solid var(--card-border); }
-.chat-msg.self .chat-bubble { background: #8a4aff; color: #fff; border: none; }.chat-input-bar { display: flex; gap: 8px; padding: 10px 12px; background: var(--card-bg); border-top: 1px solid var(--card-border); }
-.chat-input { flex: 1; padding: 9px 14px; border: 1.5px solid var(--card-border); border-radius: 20px; font-size: 14px; outline: none; background: transparent; color: var(--text-main); }
-.chat-send { padding: 9px 20px; background: #8a4aff; color: #fff; border: none; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
-.friend-menu { position: fixed; z-index: 10006; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 10px; padding: 4px; display: none; min-width: 130px; }
-.friend-menu button { display: block; width: 100%; padding: 9px; border: none; background: none; color: var(--text-main); cursor: pointer; text-align: left; }
-.up-body { padding: 22px 16px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.up-avatar { width: 88px; height: 88px; border-radius: 50%; background: #8a4aff; display: flex; align-items: center; justify-content: center; font-size: 48px; border: 3px solid var(--card-border); color: #fff;}
-.up-name { font-size: 20px; font-weight: 800; color: var(--text-main); }
-.up-btn { width: 100%; padding: 11px; background: #8a4aff; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.chat-bubble { padding: 9px 13px; border-radius: 14px; background: rgba(255,255,255,0.15); font-size: 14px; line-height: 1.5; word-break: break-word; color: #fff; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(4px); }
+.chat-msg.self .chat-bubble { background: rgba(138,74,255,0.7); color: #fff; border: none; }.chat-input-bar { display: flex; gap: 8px; padding: 10px 12px; background: rgba(60,60,70,0.4); backdrop-filter: blur(10px); border-top: 1px solid rgba(255,255,255,0.1); }
+.chat-input { flex: 1; padding: 9px 14px; border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; font-size: 14px; outline: none; background: rgba(255,255,255,0.08); color: #fff; }
+.chat-input::placeholder { color: rgba(255,255,255,0.5); }
+.chat-send { padding: 9px 20px; background: rgba(138,74,255,0.8); color: #fff; border: none; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.friend-menu { position: fixed; z-index: 10006; background: rgba(80,80,90,0.9); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 4px; display: none; min-width: 130px; }
+.friend-menu button { display: block; width: 100%; padding: 9px; border: none; background: none; color: #fff; cursor: pointer; text-align: left; }
+.up-body { padding: 22px 16px; overflow-y: auto; display: flex; flex-direction: column; align-items: center; gap: 14px; background: transparent; }
+.up-avatar { width: 88px; height: 88px; border-radius: 50%; background: rgba(138,74,255,0.8); display: flex; align-items: center; justify-content: center; font-size: 48px; border: 3px solid rgba(255,255,255,0.3); color: #fff;}
+.up-name { font-size: 20px; font-weight: 800; color: #fff; }
+.up-btn { width: 100%; padding: 11px; background: rgba(138,74,255,0.8); color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
 .lib-body { flex: 1; overflow-y: auto; padding: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.lib-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 10px; background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 12px; text-decoration: none; color: var(--text-main); }
+.lib-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; text-decoration: none; color: #fff; backdrop-filter: blur(4px); }
 .lib-icon { font-size: 32px; margin-bottom: 8px; }
 .lib-name { font-size: 14px; font-weight: 700; text-align: center; }
-.lib-desc { font-size: 11px; color: var(--text-sub); margin-top: 4px; text-align: center; }#noticeOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 10001; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); }
+.lib-desc { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 4px; text-align: center; }#noticeOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 10001; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); }
 #noticePanel { position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; background: #fff; border-radius: 16px; box-shadow: 0 0 50px rgba(0,0,0,0.25); display: flex; flex-direction: column; align-items: center; padding: 28px 24px; overflow-y: auto; animation: noticeIn 0.7s cubic-bezier(0.22,1,0.36,1) forwards; }
 @keyframes noticeIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 #noticeOverlay.closing #noticePanel { animation: noticeOut 0.5s forwards; }
@@ -276,17 +292,6 @@ var games = {};
   var key=function(e){var k=e.key;if(k==='ArrowLeft'||k==='a')move('left');else if(k==='ArrowRight'||k==='d')move('right');else if(k==='ArrowUp'||k==='w')move('up');else if(k==='ArrowDown'||k==='s')move('down');};
   document.addEventListener('keydown',key);reset();
   return function(){document.removeEventListener('keydown',key);};
-};games.minesweeper=function(){
-  var wrap=document.getElementById('gameContent');
-  wrap.innerHTML='<h2>💣 扫雷</h2><div class="info" id="msInfo">💣 12　✅ 0</div><div id="msGrid" style="display:inline-block;"></div><button class="restart-btn" onclick="games.minesweeper()">重新开始</button>';
-  var W=9,H=9,MINES=12,grid,revealed,flagged,over;
-  function reset(){grid=Array.from({length:H},function(){return Array.from({length:W},function(){return {mine:false,adj:0};});});revealed=Array.from({length:H},function(){return Array(W).fill(false);});flagged=Array.from({length:H},function(){return Array(W).fill(false);});over=false;var placed=0;while(placed<MINES){var r=~~(Math.random()*H),c=~~(Math.random()*W);if(!grid[r][c].mine){grid[r][c].mine=true;placed++;}}for(var r2=0;r2<H;r2++)for(var c2=0;c2<W;c2++)if(!grid[r2][c2].mine){var n=0;for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++){var nr=r2+dr,nc=c2+dc;if(nr>=0&&nr<H&&nc>=0&&nc<W&&grid[nr][nc].mine)n++;}grid[r2][c2].adj=n;}document.getElementById('msInfo').textContent='💣 12　✅ 0';render();}
-  function reveal(r,c){if(r<0||r>=H||c<0||c>=W||revealed[r][c]||flagged[r][c]||over)return;revealed[r][c]=true;if(grid[r][c].mine){lose();return;}if(grid[r][c].adj===0)for(var dr=-1;dr<=1;dr++)for(var dc=-1;dc<=1;dc++)if(dr||dc)reveal(r+dr,c+dc);checkWin();}
-  function toggleFlag(r,c){if(revealed[r][c]||over)return;flagged[r][c]=!flagged[r][c];var n=0;flagged.forEach(function(row){row.forEach(function(v){if(v)n++;});});document.getElementById('msInfo').textContent='💣 '+(MINES-n)+'　✅ '+n;render();}
-  function lose(){over=true;for(var r=0;r<H;r++)for(var c=0;c<W;c++)revealed[r][c]=true;render();document.getElementById('msInfo').textContent='💥 踩雷了！';}
-  function checkWin(){for(var r=0;r<H;r++)for(var c=0;c<W;c++)if(!grid[r][c].mine&&!revealed[r][c])return;over=true;document.getElementById('msInfo').textContent='🎉 扫雷成功！';}
-  function render(){var g=document.getElementById('msGrid');g.innerHTML='';for(var r=0;r<H;r++)for(var c=0;c<W;c++){(function(r,c){var btn=document.createElement('button');btn.style.cssText='width:34px;height:34px;margin:1px;font-weight:bold;font-size:14px;';if(!revealed[r][c]){btn.style.background=flagged[r][c]?'#4a1a6b':'rgba(255,255,255,0.1)';btn.textContent=flagged[r][c]?'🚩':'';}else if(grid[r][c].mine){btn.style.background='#8a1a1a';btn.textContent='💣';}else{btn.style.background='rgba(200,190,230,0.2)';btn.style.color=grid[r][c].adj===1?'#4a9aff':grid[r][c].adj===2?'#2a8a2a':'#c0a0ff';btn.textContent=grid[r][c].adj||'';}btn.addEventListener('click',function(){reveal(r,c);});btn.addEventListener('contextmenu',function(e){e.preventDefault();toggleFlag(r,c);});g.appendChild(btn);})(r,c);}}
-  reset();return function(){};
 };games.memory=function(){
   var wrap=document.getElementById('gameContent');wrap.innerHTML='<h2>🃏 记忆翻牌</h2><div id="memGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:360px;margin:0 auto;"></div><button class="restart-btn" onclick="games.memory()">重新开始</button>';
   var icons=['🍎','🍌','🍇','🍓','🍒','🥝','🍑','🍍'],deck=icons.concat(icons).sort(function(){return Math.random()-0.5;}),flipped=[],matched=0,grid=document.getElementById('memGrid');
@@ -374,14 +379,14 @@ function renderMessages(){
   body.innerHTML='';document.getElementById('chatInputBar').style.display='flex';
   if(inFriendsView){
     titleEl.textContent='👥 我的好友';backBtn.style.display='none';document.getElementById('chatInputBar').style.display='none';
-    if(friends.length===0){body.innerHTML='<div style="text-align:center;color:#666;padding:30px">还没有好友哦～<br>点击别人头像即可添加</div>';return;}
-    friends.forEach(function(f){var item=document.createElement('div');item.style.cssText='display:flex;gap:10px;padding:10px;background:var(--card-bg);border-radius:10px;margin-bottom:8px;cursor:pointer;border:1px solid var(--card-border);';item.innerHTML='<div class="chat-avatar">'+f.avatar+'</div><div style="color:var(--text-main);font-weight:bold;">'+f.name+'</div>';item.onclick=function(){currentChat=f.id;inFriendsView=false;renderMessages();};body.appendChild(item);});
+    if(friends.length===0){body.innerHTML='<div style="text-align:center;color:rgba(255,255,255,0.6);padding:30px">还没有好友哦～<br>点击别人头像即可添加</div>';return;}
+    friends.forEach(function(f){var item=document.createElement('div');item.style.cssText='display:flex;gap:10px;padding:10px;background:rgba(255,255,255,0.08);border-radius:10px;margin-bottom:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.15);';item.innerHTML='<div class="chat-avatar">'+f.avatar+'</div><div style="color:#fff;font-weight:bold;">'+f.name+'</div>';item.onclick=function(){currentChat=f.id;inFriendsView=false;renderMessages();};body.appendChild(item);});
     return;
   }
   if(currentChat==='public'){titleEl.textContent='🌍 全部聊天';backBtn.style.display='none';publicMsgs.forEach(renderMsg);}
   else{var fr=friends.filter(function(x){return x.id===currentChat;})[0];if(!fr){currentChat='public';renderMessages();return;}titleEl.textContent=fr.avatar+' '+fr.name;backBtn.style.display='flex';(privateMsgs[currentChat]||[]).forEach(renderMsg);}
   setTimeout(function(){body.scrollTop=body.scrollHeight;},30);
-                     }function renderMsg(m){
+                                      }function renderMsg(m){
     var isSelf=(m.from===me.id);
     var div=document.createElement('div');div.className='chat-msg'+(isSelf?' self':'');
     var av=document.createElement('div');av.className='chat-avatar';av.textContent=m.avatar;
@@ -391,16 +396,41 @@ function renderMessages(){
   document.addEventListener('click',function(){document.getElementById('friendMenu').style.display='none';});
   backBtn.onclick=function(){currentChat='public';inFriendsView=false;renderMessages();};
   friendsBtn.onclick=function(){inFriendsView=!inFriendsView;if(inFriendsView)currentChat='public';renderMessages();};
+  
+  // 核心：完全异步 Fetch，不跳转页面，直接在聊天框渲染
   async function callAI(msg, aiName){
-    try{return await puter.ai.chat("你是一个真实的网友，名叫"+aiName+"。回复简短、接地气，懂网络热词：" + msg, { model: 'moonshotai/kimi-k3' });}
-    catch(e){return "啊这...网络有点卡，但我懂你意思！";}
+    try{
+      var prompt = encodeURIComponent("你现在是一个真实的年轻中国网友，名字叫" + aiName + "。回复必须极度口语化、接地气，绝不能有AI的客套话。懂网络热词，简短1-2句。用户说：" + msg);
+      var res = await fetch('https://text.pollinations.ai/' + prompt);
+      return await res.text();
+    }catch(e){return "啊这...网络有点卡，但我懂你意思！";}
   }
-  document.getElementById('chatSend').onclick=async function(){
+  
+  // 发送事件，拦截默认行为，保证不跳转
+  document.getElementById('chatSend').onclick=async function(e){
+    if(e) e.preventDefault();
     var input=document.getElementById('chatInput'),text=input.value.trim();if(!text)return;input.value='';
     var myMsg={from:me.id,name:me.name,avatar:me.avatar,text:text};
-    if(currentChat==='public'){publicMsgs.push(myMsg);saveChat();renderMessages();var ai=aiUsers[~~(Math.random()*aiUsers.length)];publicMsgs.push({from:ai.id,name:ai.name,avatar:ai.avatar,text:'正在输入...'});saveChat();renderMessages();var reply=await callAI(text,ai.name);publicMsgs.pop();publicMsgs.push({from:ai.id,name:ai.name,avatar:ai.avatar,text:reply});saveChat();if(currentChat==='public')renderMessages();}
-    else{if(!privateMsgs[currentChat])privateMsgs[currentChat]=[];privateMsgs[currentChat].push(myMsg);saveChat();renderMessages();var fr=friends.filter(function(x){return x.id===currentChat;})[0];privateMsgs[currentChat].push({from:fr.id,name:fr.name,avatar:fr.avatar,text:'正在输入...'});saveChat();renderMessages();var reply=await callAI(text,fr.name);privateMsgs[currentChat].pop();privateMsgs[currentChat].push({from:fr.id,name:fr.name,avatar:fr.avatar,text:reply});saveChat();if(currentChat===fr.id)renderMessages();}
+    
+    if(currentChat==='public'){
+      publicMsgs.push(myMsg);saveChat();renderMessages();
+      var ai=aiUsers[~~(Math.random()*aiUsers.length)];
+      publicMsgs.push({from:ai.id,name:ai.name,avatar:ai.avatar,text:'正在输入...'});saveChat();renderMessages();
+      var reply=await callAI(text,ai.name);
+      publicMsgs.pop();publicMsgs.push({from:ai.id,name:ai.name,avatar:ai.avatar,text:reply});saveChat();
+      if(currentChat==='public')renderMessages();
+    } else {
+      if(!privateMsgs[currentChat])privateMsgs[currentChat]=[];
+      privateMsgs[currentChat].push(myMsg);saveChat();renderMessages();
+      var fr=friends.filter(function(x){return x.id===currentChat;})[0];
+      privateMsgs[currentChat].push({from:fr.id,name:fr.name,avatar:fr.avatar,text:'正在输入...'});saveChat();renderMessages();
+      var reply=await callAI(text,fr.name);
+      privateMsgs[currentChat].pop();privateMsgs[currentChat].push({from:fr.id,name:fr.name,avatar:fr.avatar,text:reply});saveChat();
+      if(currentChat===fr.id)renderMessages();
+    }
+    return false;
   };
+  
   document.getElementById('chatInput').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('chatSend').click();});
   var EMOJIS=['🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵'];
   document.getElementById('upChangeAvatar').onclick=function(){me.avatar=EMOJIS[~~(Math.random()*EMOJIS.length)];localStorage.setItem('zs_me',JSON.stringify(me));document.getElementById('upAvatar').textContent=me.avatar;};
@@ -410,4 +440,14 @@ function renderMessages(){
 })();
 </script>
 </body>
-</html>
+</html>// 在 main.js 的最末尾加入这段代码
+events.on("exit", function() {
+    try {
+        // 注销加速度传感器监听
+        sensor.unregister("accelerometer");
+    } catch(e) {}
+    try {
+        // 清除所有定时器
+        clearInterval();
+    } catch(e) {}
+});
